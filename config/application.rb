@@ -19,6 +19,10 @@ module Booking
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    config.action_mailer.default_url_options = { :host => 'localhost:3000' }  
+    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+    config.to_prepare do
+      DeviseController.respond_to :json
+    end
   end
 end

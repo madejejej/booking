@@ -1,0 +1,13 @@
+doctype html
+html(ng-app="Booking")
+  head
+  title Booking
+  = stylesheet_link_tag "application", media: "all"
+  = javascript_include_tag "application"
+  = csrf_meta_tags
+  body
+    = render "layouts/navigation"
+    = render "layouts/flash"
+    div(ng-view)
+      = yield
+    = render "layouts/footer"
