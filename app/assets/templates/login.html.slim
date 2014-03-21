@@ -1,0 +1,8 @@
+nav
+  div#login-field
+    div email
+    input#email(ng-model="login_user.email")
+    div password
+    input#password type="password" ng-model="login_user.password"
+    button ng-click="login()" Login
+    button ng-click="logout()" Logout

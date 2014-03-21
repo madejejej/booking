@@ -1,0 +1,11 @@
+nav
+  ul.nav.nav-pills
+    li.active
+      a href="/" Home
+    - if !current_user.present?
+      li
+        a href="/#/login" Login
+      li
+        a href="/#/register" Register
+    - else
+      | Welcome #{current_user.email}
