@@ -12,10 +12,10 @@
         password: $scope.login_user.password
     ).success( () ->
       $('#login-field').html('<p>Signed in successfuly</p>')
-      $('#error').hide()
+      $('#login-error').hide()
       setTimeout((->  location.reload()), 1500)
     ).error( () ->
-      $('#error').html('<p>Invalid username or password!</p>').show()
+      $('#login-error').show()
     )
   $scope.logout = () ->
     $http.delete('../api/users/sign_out.json'
@@ -34,7 +34,8 @@
       $scope.login_user.email = $scope.register_user.email
       $scope.login_user.password = $scope.register_user.password
       $scope.login()
-   ).error( () ->
-
+   ).error( (response) ->
+     console.log(response.errors)
+     $scope.error = response.errors
    )
 )

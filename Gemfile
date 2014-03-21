@@ -19,11 +19,8 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'angularjs-rails'
-gem 'twitter-bootstrap-rails'
-gem 'bootstrap-sass'
 gem 'devise'
 gem 'slim'
-
 gem 'factory_girl_rails'
 
 group :development, :test do

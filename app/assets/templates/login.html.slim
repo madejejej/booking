@@ -1,7 +1,15 @@
-nav
+form.form-horizontal role="form"
+  div#login-error style="display: none;"
+    | Invalid username or password
   div#login-field
-    div email
-    input#email(ng-model="login_user.email")
-    div password
-    input#password type="password" ng-model="login_user.password"
-    button ng-click="login()" Login
+    div.form-group
+      label.col-sm-4.control-label for="email" email
+      div.col-sm-8
+        input.form-control#email ng-model="login_user.email" placeholder="email"
+    div.form-group
+      label.col-sm-4.control-label for="password" password
+      div.col-sm-8
+        input.form-control#password type="password" ng-model="login_user.password" placeholder="Password"
+    div.form-group
+      div.col-sm-offset-4.col-sm-8
+        button.btn.btn-default ng-click="login()" Login

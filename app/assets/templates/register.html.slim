@@ -1,10 +1,28 @@
 h1 Registration
-div#register-field
-  div email
-  input#email(ng-model="register_user.email")
-  div password
-  input#password type="password" ng-model="register_user.password"
-  div confirm password
-  input#confirm-password type="password" ng-model="register_user.password_confirmation"
-  button ng-click="register()" Register
+form.form-horizontal role="form"
+  div#register-field
+    div.error ng-show="error"
+      p.error User could not be saved!
+    div.form-group
+      label.col-sm-4.control-label for="email" ng-class="{error: error.email}" email
+      div.col-sm-8
+        input.form-control#email ng-model="register_user.email" placeholder="email"
+    div ng-show="error.email"
+      div ng-repeat="error in error.email"
+        | {{error}}
+    div.form-group
+      label.col-sm-4.control-label for="password" ng-class="{error: error.password}" password
+      div.col-sm-8
+        input.form-control#password type="password" ng-model="register_user.password" placeholder="Password"
+    div ng-show="error.password"
+      div ng-repeat="error in error.password"
+        | {{error}}
+    div.form-group
+      label.col-sm-4.control-label for="confirm-password" ng-class="{error: error.password_confirmation}" confirm password
+      div.col-sm-8
+        input.form-control#confirm-password type="password" ng-model="register_user.password_confirmation" placeholder="Confirm password"
+    div ng-show="error.password_confirmation"
+      div ng-repeat="error in error.password_confirmation"
+        | {{error}}
+    button.col-sm-offset-4.btn.btn-default ng-click="register()" Register
 
