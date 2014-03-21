@@ -18,4 +18,4 @@
 //= require angular-resource
 //= require angular-animate
 //= require bootstrap
-//= require_tree .
+//= require main

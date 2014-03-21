@@ -1,20 +1,18 @@
 #= require_self
-#= require_tree ./Controllers/main
-#= require_tree ./Directives/main
-#= require_tree ./Filters/main
-#= require_tree ./Services/main
+#= require_tree ./controllers/main
+#= require_tree ./directives/main
+#= require_tree ./filters/main
+#= require_tree ./services/main
 
-App = angular.module('App', ['ngRoute'])
+@App = angular.module('App', ['ngRoute'])
 
-template = (path) ->
-  "../templates/" + path
-
-App.config ($routeProvider, $locationProvider) ->
+@App.config ($routeProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)
   $routeProvider
     .when "/",
       templateUrl: "<%= asset_path("home.html") %>"
     .when "/login",
       templateUrl: "<%= asset_path("login.html") %>"
+      controller: 'LoginController'
     .when "/register",
       templateUrl: "<%= asset_path("register.html") %>"
