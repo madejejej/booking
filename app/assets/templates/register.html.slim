@@ -1,2 +1,10 @@
-h1
-  | OOPS! You can't register! LOL!
+h1 Registration
+div#register-field
+  div email
+  input#email(ng-model="register_user.email")
+  div password
+  input#password type="password" ng-model="register_user.password"
+  div confirm password
+  input#confirm-password type="password" ng-model="register_user.password_confirmation"
+  button ng-click="register()" Register
+

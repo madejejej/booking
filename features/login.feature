@@ -5,7 +5,7 @@ Feature: Login system
 
   @javascript
   Scenario: Logging in
-    Given I’m on the login page
+    Given I’m on the "login" page
     When I provide my credentials
-    And I press the login button
+    And I press the "Login" button
     Then I should see "Signed in successfuly"
