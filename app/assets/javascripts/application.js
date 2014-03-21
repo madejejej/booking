@@ -19,3 +19,4 @@
 //= require angular-animate
 //= require bootstrap
 //= require main
+//= require_tree .
