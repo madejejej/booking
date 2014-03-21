@@ -1,4 +1,4 @@
-nav
+navi#navigation
   ul.nav.nav-pills
     li.active
       a href="/" Home
@@ -8,4 +8,6 @@ nav
       li
         a href="/#/register" Register
     - else
-      | Welcome #{current_user.email}
+      div(ng-controller="LoginController")
+        | Welcome #{current_user.email}
+        button ng-click="logout()" Logout
