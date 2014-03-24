@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319180705) do
+ActiveRecord::Schema.define(version: 20140324090758) do
+
+  create_table "durations", force: true do |t|
+    t.integer  "seconds"
+    t.integer  "movie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "durations", ["movie_id"], name: "index_durations_on_movie_id"
+
+  create_table "movies", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "cover_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
