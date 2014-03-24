@@ -1,4 +1,5 @@
 #= require_self
+#= require_tree ./modules
 #= require_tree ./services/main
 #= require_tree ./controllers/main
 #= require_tree ./directives/main
@@ -22,7 +23,7 @@
       templateUrl: "<%= asset_path("movies/index.html") %>"
       controller: 'MoviesListingController'
 
-App.config [
+@App.config [
     "$httpProvider"
     ($httpProvider) ->
         $httpProvider.defaults.headers.common["X-CSRF-Token"] = $("meta[name=csrf-token]").attr("content")

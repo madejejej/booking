@@ -8,9 +8,10 @@ nav#navigation
         a href="/#/login" Login
       li
         a href="/#/register" Register
-      li
-        a href="/#/movies" Movies
     - else
       div(ng-controller="LoginController")
         | Welcome #{current_user.email}
         button ng-click="logout()" Logout
+    li
+      a href="/#/movies" Movies
+
