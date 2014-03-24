@@ -1,4 +1,4 @@
-@App.controller( 'LoginController', ($scope, $http, $animate) ->
+@controllers.controller( 'LoginController',['$scope','$http','$animate',  ($scope, $http, $animate) ->
   $scope.login_user = {email: null, password: null}
   $scope.register_user =
     email: null
@@ -38,4 +38,4 @@
      console.log(response.errors)
      $scope.error = response.errors
    )
-)
+])

@@ -1,10 +1,11 @@
 #= require_self
+#= require_tree ./services/main
 #= require_tree ./controllers/main
 #= require_tree ./directives/main
 #= require_tree ./filters/main
-#= require_tree ./services/main
 
-@App = angular.module('App', ['ngRoute'])
+
+@App = angular.module('App', ['App.services','App.controllers','ngRoute'])
 
 @App.config ($routeProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)
@@ -17,7 +18,12 @@
     .when "/register",
       templateUrl: "<%= asset_path("register.html") %>"
       controller: 'LoginController'
+    .when "/movies",
+      templateUrl: "<%= asset_path("index.html") %>"
+      controller: 'MoviesListingController'
 
-@App.config(['$httpProvider', ($httpProvider) ->
-  $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content')
-  ])
+App.config [
+    "$httpProvider"
+    ($httpProvider) ->
+        $httpProvider.defaults.headers.common["X-CSRF-Token"] = $("meta[name=csrf-token]").attr("content")
+]
