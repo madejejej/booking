@@ -10,7 +10,7 @@ table.table.table-hover
   tbody
     tr ng-repeat="movie in movies"
       th
-        | coverWillGoHere
+        img ng-src='{{movie.cover_url}}' width="50" height="50"
       th
         | {{movie.title}}
       th
