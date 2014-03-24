@@ -4,6 +4,7 @@ class CreateMovies < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.string :cover_url
+      t.integer :duration
 
       t.timestamps
     end
