@@ -1,4 +1,17 @@
-span
-|    {{movies}}
-|    {{aaa}}
-button ng-click="click()"  click
+table.table.table-hover
+  thead
+    tr
+      th
+        | Cover
+      th
+        | Title
+      th
+        | Description
+  tbody
+    tr ng-repeat="movie in movies"
+      th
+        | coverWillGoHere
+      th
+        | {{movie.title}}
+      th
+        | {{movie.description}}
