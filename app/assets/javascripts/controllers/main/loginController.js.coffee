@@ -13,14 +13,14 @@
     ).success( () ->
       $('#login-field').html('<p>Signed in successfuly</p>')
       $('#login-error').hide()
-      setTimeout((->  location.reload()), 1500)
+      setTimeout((->  window.location = "/"), 1500)
     ).error( () ->
       $('#login-error').show()
     )
   $scope.logout = () ->
     $http.delete('../api/users/sign_out.json'
     ).success( () ->
-      location.reload()
+      window.location = "/"
     )
 
   $scope.register = () ->
