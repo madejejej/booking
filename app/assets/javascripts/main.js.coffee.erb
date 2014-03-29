@@ -22,6 +22,9 @@
     .when "/movies",
       templateUrl: "<%= asset_path("movies/index.html") %>"
       controller: 'MoviesListingController'
+    .when "/movies/:movie_id/shows",
+      templateUrl: "<%= asset_path("movies/shows.html") %>"
+      controller: 'ShowsListingController'
 
 @App.config [
     "$httpProvider"

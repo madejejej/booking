@@ -10,7 +10,7 @@ table.table.table-hover
       th
         | Duration
   tbody
-    tr ng-repeat="movie in movies"
+    tr ng-repeat="movie in movies" ng-click="viewShows(movie)"
       th
         img ng-src='{{movie.cover_url}}' width="50" height="50"
       th

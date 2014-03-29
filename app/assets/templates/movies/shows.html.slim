@@ -1,0 +1,13 @@
+table.table.table-hover
+  thead
+    tr
+      th
+        | Date
+      th
+        | Screen
+  tbody
+    tr ng-repeat="show in shows"
+      th
+        | show.date
+      th
+        | show.screen_id
