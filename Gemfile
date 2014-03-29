@@ -30,6 +30,9 @@ group :development, :test do
   gem 'database_cleaner'
 end
 
+group :test do
+  gem 'shoulda'
+end
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
