@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Movie.new(title: 'Matrix', description: 'Super Neo fighting and flying!', cover_url: 'assets/movies_covers/matrix.jpg', duration: 120).save()
+Movie.new(title: 'Matrix 2', description: 'Super Neo fighting and flying even more!', cover_url: 'assets/movies_covers/matrix2.jpg', duration: 130).save()
