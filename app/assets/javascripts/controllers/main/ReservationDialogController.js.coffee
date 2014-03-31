@@ -1,4 +1,3 @@
-@controllers.controller('ReservationDialogController', [ '$scope', ($scope) ->
-  $scope.msg = 'hejka z kontolera'
-
-])
+@controllers.controller('ReservationDialogController', [ '$scope', 'showId', ($scope, showId) ->
+  $scope.msg = 'hejka z kontolera' + showId
+]);
