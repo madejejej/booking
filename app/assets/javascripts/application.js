@@ -18,3 +18,4 @@
 //= require angular-animate
 //= require main
 //= require_tree .
+//= require ui-bootstrap-tpls-0.10.0.js
