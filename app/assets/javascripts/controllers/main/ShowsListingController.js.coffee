@@ -1,5 +1,5 @@
-@controllers.controller( 'ShowsListingController',['$scope', '$routeParams', 'ShowService',  ($scope, $routeParams, ShowService) ->
+@controllers.controller('ShowsListingController',['$scope', '$routeParams', 'MovieService',  ($scope, $routeParams, MovieService) ->
 
-  $scope.shows = ShowService.query($routeParams.movie_id)
+  $scope.shows = MovieService.queryShows($routeParams.movie_id)
 
 ])

@@ -2,12 +2,12 @@ table.table.table-hover
   thead
     tr
       th
-        | Date
-      th
         | Screen
+      th
+        | Date
   tbody
     tr ng-repeat="show in shows"
-      th
-        | show.date
-      th
-        | show.screen_id
+      td
+        | {{show.name}}
+      td
+        | {{show.date}}
