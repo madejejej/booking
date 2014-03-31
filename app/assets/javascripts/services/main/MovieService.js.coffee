@@ -1,4 +1,4 @@
-#= require_tree ./
+#= require ./services.js
 
 @services.factory("MovieService", ($resource) ->
 
@@ -23,13 +23,4 @@
         return
       )
     movies
-
-  factory.queryShows = (movieId) ->
-    shows = $resource("/api/movies/#{movieId}/shows", {},
-      query:
-        method: "GET"
-        isArray: true
-    ).query()
-    shows
-  factory
 )
