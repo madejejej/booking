@@ -1,16 +1,13 @@
 table.table.table-hover
   thead
     tr
-      th
-        | Cover
-      th
-        | Title
-      th
-        | Description
-      th
-        | Duration
+      th Cover
+      th Title
+      th Description
+      th Duration
+      th Shows
   tbody
-    tr ng-repeat="movie in movies"
+    tr ng-repeat="movie in movies" ng-click="viewShows(movie)"
       th
         img ng-src='{{movie.cover_url}}' width="50" height="50"
       th

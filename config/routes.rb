@@ -11,7 +11,7 @@ Booking::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
-  get ':path' => redirect('/#%{path}')
+  get '*path' => redirect('/#%{path}')
 
 
   # Example of regular route:

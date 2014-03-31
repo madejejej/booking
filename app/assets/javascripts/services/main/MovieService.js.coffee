@@ -1,5 +1,3 @@
-#= require_tree ./
-
 @services.factory("MovieService", ($resource) ->
 
   factory = {}
