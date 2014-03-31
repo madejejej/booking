@@ -8,7 +8,11 @@
       query:
         method: "GET"
         isArray: true
-    ).query()
+    ).query(->
+      angular.forEach shows, (show) ->
+        show.date = new Date(show.date).toString("d-MMM-yyyy HH:mm")
+        return
+    )
     shows
   factory
 )
