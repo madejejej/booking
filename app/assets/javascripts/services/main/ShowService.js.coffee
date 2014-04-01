@@ -14,5 +14,11 @@
         return
     )
     shows
+
+  factory.CRUD = (showId) ->
+    return $resource("/api/shows/:showId/reservation", {showId: showId},
+      create:
+        method: 'POST'
+    )
   factory
 )
