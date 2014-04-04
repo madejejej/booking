@@ -4,4 +4,9 @@ class Movie::Show < ActiveRecord::Base
 
   validates :movie, presence: true
   validates :screen, presence: true
+
+  scope :all_for_movie_with_screen, ->(movie_id) do
+    select(:date, :name).where(movie_id: movie_id).joins(:screen)
+  end
+
 end

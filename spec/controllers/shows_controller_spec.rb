@@ -7,7 +7,7 @@ describe ShowsController do
       let(:shows) { FactoryGirl.build_list(:movie_show, 3) }
 
       before do
-        Movie::Show.should_receive(:where).with(movie_id: "1").and_return(shows)
+        Movie::Show.should_receive(:all_for_movie_with_screen).with("1").and_return(shows)
         get :index, movie_id: 1, format: :json
       end
 
@@ -17,7 +17,7 @@ describe ShowsController do
 
     context "with invalid movie_id" do
       before do
-        Movie::Show.should_receive(:where).with(movie_id: "1").and_return([])
+        Movie::Show.should_receive(:all_for_movie_with_screen).with("1").and_return([])
         get :index, movie_id: 1, format: :json
       end
 
