@@ -8,4 +8,13 @@ describe Movie::Show do
 
   it { should validate_presence_of :movie }
   it { should validate_presence_of :screen }
+
+  it { should have_many :reservations }
+
+  describe '#number_of_free_seats' do
+    before do
+    end
+
+  end
 end
+

@@ -2,7 +2,9 @@ Booking::Application.routes.draw do
   scope :api, defaults: { format: :json }, constraints: { format: /json/ }   do
     devise_for :users
     resources :movies do
-      resources :shows, only: [:index]
+      resources :shows do
+        resources :reservations
+      end
     end
   end
 
