@@ -3,11 +3,11 @@ class NIPValidator < ActiveModel::Validator
   def validate(record)
     if record.nip.length === 10 && record.nip.match(/^\d+$/)
       weights = [6, 5, 7, 2, 3, 4, 5, 6, 7]
-      nip = (record.nip.split //).collect &:to_i
+      nip = record.nip.split(//).collect(&:to_i)
       checksum = weights.inject(0) { |sum, weight| sum + weight * nip.shift }
-      return checksum % 11 === nip.shift
-    else
-      return false
+      return if checksum % 11 === nip.shift
     end
+
+    record.errors.add :nip, "is incorrect"
   end
 end
