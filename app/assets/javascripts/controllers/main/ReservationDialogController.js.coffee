@@ -9,6 +9,7 @@
 
 
     $scope.validReservationForm = () ->
+      console.log($scope.reservation.booker.length > 0 && $scope.reservation.numberOfSeats > 0)
       return $scope.reservation.booker.length > 0 && $scope.reservation.numberOfSeats > 0
 
     $scope.makeReservation = () ->

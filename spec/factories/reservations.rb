@@ -4,4 +4,5 @@ FactoryGirl.define do
   factory :reservation do
     booker "Janek"
   end
+
 end
