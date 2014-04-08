@@ -1,5 +1,3 @@
-#= require ./services.js
-
 @services.factory("ShowService", ($resource) ->
   factory = {}
 
