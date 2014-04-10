@@ -5,6 +5,7 @@ Booking::Application.routes.draw do
       resource :organiser
     end
 
+    match "whoami", controller: :users, via: :get
     resources :movies do
       resources :shows, only: [:index]
     end
