@@ -1,0 +1,9 @@
+# Read about factories at https://github.com/thoughtbot/factory_girl
+
+FactoryGirl.define do
+  factory :organiser_datum, :class => 'OrganiserData' do
+    name "MyCompany"
+    description "In MyCompany we believe in super duper movies"
+    nip "1234563218"
+  end
+end
