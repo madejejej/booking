@@ -5,7 +5,7 @@
         return $resource("/api/movies/#{movieId}", {},
             query:
                 method: "GET"
-        )        
+        ).query()
     factory
 )
 
