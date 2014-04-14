@@ -9,11 +9,11 @@
 
 
     $scope.validReservationForm = () ->
-      console.log($scope.reservation.booker.length > 0 && $scope.reservation.numberOfSeats > 0)
+      if $scope.reservation.booker is undefined then return false
       return $scope.reservation.booker.length > 0 && $scope.reservation.numberOfSeats > 0
 
     $scope.makeReservation = () ->
-      ShowService.CRUD().create
+      ShowService.CRUD(showId).create
         showId: showId
         $scope.reservation
 

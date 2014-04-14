@@ -14,7 +14,7 @@
     shows
 
   factory.CRUD = (showId) ->
-    return $resource("/api/shows/:showId/reservation", {showId: showId},
+    return $resource("/api/shows/#{showId}/reservation", {},
       create:
         method: 'POST'
     )
