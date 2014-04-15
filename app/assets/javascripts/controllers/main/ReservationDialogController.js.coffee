@@ -1,5 +1,5 @@
 @controllers.controller('ReservationDialogController',
-  [ '$scope', 'showId', 'ShowService', ($scope, showId, ShowService) ->
+  [ '$scope', 'movieId', 'showId', 'ShowService', ($scope, movieId, showId, ShowService) ->
     $scope.msg = 'hejka z kontolera' + showId
 
     $scope.reservation =
@@ -13,7 +13,9 @@
       return $scope.reservation.booker.length > 0 && $scope.reservation.numberOfSeats > 0
 
     $scope.makeReservation = () ->
-      ShowService.CRUD(showId).create
+      console.log(movieId, showId)
+      ShowService.CRUD(movieId,showId).create
+        movieId: movieId
         showId: showId
         $scope.reservation
 

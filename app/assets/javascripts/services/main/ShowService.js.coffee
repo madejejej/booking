@@ -13,10 +13,13 @@
     )
     shows
 
-  factory.CRUD = (showId) ->
-    return $resource("/api/shows/#{showId}/reservation", {},
+  factory.CRUD = (movieId,showId) ->
+    return $resource("/api/movies/:movieId/shows/:showId/reservations", {},
       create:
         method: 'POST'
+        params:
+          showId : '@showId'
+          movieId: '@movieId'
     )
   factory
 )

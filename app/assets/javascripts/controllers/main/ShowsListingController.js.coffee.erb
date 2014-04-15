@@ -1,6 +1,9 @@
 @controllers.controller('ShowsListingController',
         ['$scope', '$routeParams', '$modal', 'ShowService', ($scope, $routeParams, $modal, ShowService) ->
-            $scope.shows = ShowService.queryShows($routeParams.movie_id)
+
+            $scope.movieId = $routeParams.movie_id
+
+            $scope.shows = ShowService.queryShows($scope.movieId)
 
             $scope.openReservationDialog = (showId) ->
                 modalInstance = $modal.open
@@ -9,6 +12,7 @@
                     resolve:
                         showId: () ->
                             showId
-
+                        movieId: () ->
+                            $scope.movieId
             return
         ])
