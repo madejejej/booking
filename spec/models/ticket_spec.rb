@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ReservationSeat do
+describe Ticket do
   it { should belong_to :reservation }
   it { should belong_to :seat }
 

@@ -1,4 +1,4 @@
-class ReservationSeat < ActiveRecord::Base
+class Ticket < ActiveRecord::Base
   belongs_to :reservation
   belongs_to :seat
 

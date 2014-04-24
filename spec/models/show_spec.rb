@@ -18,7 +18,7 @@ describe Show do
     let(:r1) { double("Reservation") }
 
     before do
-      show.reservations << FactoryGirl.create(:reservation_seat).reservation
+      show.reservations << FactoryGirl.create(:ticket).reservation
     end
 
     it { r1.should_not be_nil }

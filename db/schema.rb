@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424104413) do
+ActiveRecord::Schema.define(version: 20140424104903) do
 
   create_table "cinemas", force: true do |t|
     t.string   "name"
@@ -42,13 +42,6 @@ ActiveRecord::Schema.define(version: 20140424104413) do
     t.string   "name"
     t.text     "description"
     t.string   "nip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "reservation_seats", force: true do |t|
-    t.integer  "reservation_id"
-    t.integer  "seat_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -88,6 +81,13 @@ ActiveRecord::Schema.define(version: 20140424104413) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "show_type_id"
+  end
+
+  create_table "tickets", force: true do |t|
+    t.integer  "reservation_id"
+    t.integer  "seat_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
