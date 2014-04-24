@@ -1,13 +1,13 @@
-class Movie::Show < ActiveRecord::Base
+class Show < ActiveRecord::Base
   belongs_to :movie, inverse_of: :shows
-  belongs_to :screen, class_name: Movie::Screen
+  belongs_to :screen
   has_many :reservations
 
   validates :movie, presence: true
   validates :screen, presence: true
 
   scope :all_for_movie_with_screen, ->(movie_id) do
-    select(:date, :name, 'movie_shows.id').where(movie_id: movie_id).joins(:screen)
+    select(:date, :name, 'shows.id').where(movie_id: movie_id).joins(:screen)
   end
 
 

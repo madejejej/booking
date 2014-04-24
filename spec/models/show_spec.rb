@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Movie::Show do
-  let(:show) { FactoryGirl.create :movie_show }
+describe Show do
+  let(:show) { FactoryGirl.create :show }
 
   it { should belong_to :movie }
   it { should belong_to :screen }

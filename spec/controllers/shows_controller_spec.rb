@@ -4,7 +4,7 @@ describe ShowsController do
 
   describe "#index" do
     context "with valid movie_id" do
-      let(:shows) { FactoryGirl.build_list(:movie_show, 3) }
+      let(:shows) { FactoryGirl.build_list(:show, 3) }
 
       before do
         Movie::Show.should_receive(:all_for_movie_with_screen).with("1").and_return(shows)
