@@ -3,11 +3,13 @@ require 'spec_helper'
 describe Show do
   let(:show) { FactoryGirl.create :show }
 
+  it { should belong_to :show_type }
   it { should belong_to :movie }
   it { should belong_to :screen }
 
   it { should validate_presence_of :movie }
   it { should validate_presence_of :screen }
+  it { should validate_presence_of :show_type }
 
   it { should have_many :reservations }
 

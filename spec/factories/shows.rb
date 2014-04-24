@@ -5,5 +5,6 @@ FactoryGirl.define do
     association :movie, factory: :movie
     date "2014-03-29 15:22:38"
     association :screen, factory: :screen_with_seats
+    association :show_type
   end
 end
