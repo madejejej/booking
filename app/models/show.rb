@@ -1,5 +1,5 @@
 class Show < ActiveRecord::Base
-  belongs_to :movie, inverse_of: :shows
+  belongs_to :movie
   belongs_to :screen
   has_many :reservations
 
