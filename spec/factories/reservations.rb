@@ -3,6 +3,7 @@
 FactoryGirl.define do
   factory :reservation do
     booker "Janek"
+    association :show
   end
 
 end
