@@ -5,4 +5,5 @@ describe ShowType do
 
   it { should have_many :shows }
   it { should validate_presence_of :name }
+  it { should belong_to :cinema }
 end
