@@ -1,0 +1,18 @@
+@controllers.controller('ShowsListingController',
+        ['$scope', '$routeParams', '$modal', 'ShowService', ($scope, $routeParams, $modal, ShowService) ->
+
+            $scope.movieId = $routeParams.movie_id
+
+            $scope.shows = ShowService.queryShows($scope.movieId)
+
+            $scope.openReservationDialog = (showId) ->
+                modalInstance = $modal.open
+                    templateUrl: '<%= asset_path("reservation/reservationDialog.html") %>',
+                    controller: 'ReservationDialogController'
+                    resolve:
+                        showId: () ->
+                            showId
+                        movieId: () ->
+                            $scope.movieId
+            return
+        ])

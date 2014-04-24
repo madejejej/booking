@@ -1,0 +1,13 @@
+div
+  p Reservation name:
+  input type='text' ng-model='reservation.booker' ng-required='true'
+  span ng-show='!reservation.booker' class="text-danger"
+    |  * Reservation name cannot be empty
+
+  p Number of seats:
+
+  input type='number' ng-model='reservation.numberOfSeats' min='0'
+  span ng-show='!reservation.numberOfSeats' class="text-danger"
+      |  * Reservation seats must be positive value!
+  div
+    button type='submit' ng-click='makeReservation()' ng-disabled='!validReservationForm()' Create reservation

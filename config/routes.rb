@@ -7,7 +7,9 @@ Booking::Application.routes.draw do
 
     match "whoami", controller: :users, via: :get
     resources :movies do
-      resources :shows, only: [:index]
+      resources :shows do
+        resources :reservations
+      end
     end
   end
 
