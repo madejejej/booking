@@ -10,9 +10,9 @@
 screen1 = Movie::Screen.create!(name: "Multikino sala 1")
 screen2 = Movie::Screen.create!(name: "Multikino sala 2")
 
-matrix = Movie.create!(title: 'Matrix', description: 'Super Neo fighting and flying!', cover_url: 'assets/movies_covers/matrix.jpg', duration: 120)
+matrix = Movie.create!(title: 'Matrix', description: 'Super Neo fighting and flying!', cover_url: 'assets/movies_covers/matrix.jpg', director: 'Andy Wachowski Lana Wachowski')
 
-matrix2 = Movie.create!(title: 'Matrix 2', description: 'Super Neo fighting and flying even more!', cover_url: 'assets/movies_covers/matrix2.jpg', duration: 130)
+matrix2 = Movie.create!(title: 'Matrix 2', description: 'Super Neo fighting and flying even more!', cover_url: 'assets/movies_covers/matrix2.jpg', director: 'Andy Wachowski Lana Wachowski')
 
 5.times do |i|
   matrix.shows << Movie::Show.new(date: DateTime.now + i.hours, screen: screen1)

@@ -1,22 +1,23 @@
-.row.clearfix
-  .col-md-6.column
-    img ng-src='{{movie.cover_url}}' width="50" height="50"
-  .col-md-6.column
-      strong
-       | {{movie.title}}
-      br/
-      | 795 Folsom Ave, Suite 600
-      br/
-      | San Francisco, CA 94107
-      br/
-      abbr title="Phone"  P:
-      | (123) 456-7890
-.row.clearfix
-  .col-md-12.column
-    h2
-      | Description
-    p
-      | {{movie.description}}
+.main
+  .clearfix.positioner
+    .film-cover
+      img.img-thumbnail ng-src='../{{movie.cover_url}}'
+    .movie-details
+        h4
+         | {{movie.title}}
+        strong
+          | Director:
+        | {{movie.director}}
+        br/
+        | 795 Folsom Ave, Suite 600
+        br/
+        | San Francisco, CA 94107
+        br/
+        abbr title="Phone"  P:
+        | (123) 456-7890
+  .clearfix.description
+      p
+        | {{movie.description}}
 
 
 
