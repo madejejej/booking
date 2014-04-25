@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140427092231) do
 
-
   create_table "cinemas", force: true do |t|
     t.string   "name"
     t.string   "location"
