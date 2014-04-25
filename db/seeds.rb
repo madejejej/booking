@@ -36,6 +36,7 @@ matrix = Movie.create!(title: 'Matrix', description: 'Super Neo fighting and fly
 
 matrix2 = Movie.create!(title: 'Matrix 2', description: 'Super Neo fighting and flying even more!', cover_url: 'assets/movies_covers/matrix2.jpg', director: 'Andy Wachowski Lana Wachowski', duration: 96)
 
+
 5.times do |i|
   matrix.shows << Show.new(date: DateTime.now + i.hours, screen: screen1, show_type: showType)
 
