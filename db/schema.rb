@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140425155231) do
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "director"
   end
 
   create_table "organiser_data", force: true do |t|
