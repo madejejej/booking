@@ -8,6 +8,17 @@
 # ruby encoding: utf-8
 
 
+
+screen1 = Screen.create!(name: "Multikino sala 2")
+
+cinema1 = Cinema.create(name: "Multikino", location: "Kraków", phone: "123456789")
+cinema1.screens << screen1
+
+showType = ShowType.create(name: "Normalny")
+cinema1.show_types << showType
+
+ticketType1 = TicketType.create(name: "Normalny", price_in_eurocents: 11, show_type: showType)
+
 screen1 = Screen.create!(name: 'Multikino sala 1')
 screen2 = Screen.create!(name: 'Multikino sala 2')
 
@@ -27,7 +38,8 @@ matrix2 = Movie.create!(title: 'Matrix 2', description: 'Super Neo fighting and 
 
 5.times do |i|
   matrix.shows << Show.new(date: DateTime.now + i.hours, screen: screen1, show_type: showType)
-  matrix2.shows << Show.new(date: DateTime.now + (1+i).hours, screen: screen2, show_type: showType)
+
+  matrix2.shows << Show.new(date: DateTime.now + (1+i).hours, screen: screen1, show_type: showType)
 end
 
 20.times do
