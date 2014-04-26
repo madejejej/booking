@@ -27,6 +27,10 @@
         movieId: movieId
         showId: showId
         reservation
+        (success) ->
+          console.log(success);
+        (error) ->
+          console.log(error);
 
     $scope.notPositiveNumberOfTickets = () ->
       allTicketsCount = 0

@@ -13,10 +13,13 @@ class Show < ActiveRecord::Base
     select(:date, :name, 'shows.id').where(movie_id: movie_id).joins(:screen)
   end
 
+  def available_seats_ids
+    screen.seats.select(:id).map(&:id) - reservations.map(&:seats).flatten.map(&:id)
+  end
 
   def number_of_free_seats
-    occupied_seats = reservations.map(&:seats).length
-    all_seats_count - occupied_seats
+    occupied_seats = reservations.map(&:seats).flatten.length
+    all_seats_count() - occupied_seats
   end
 
   def all_seats_count

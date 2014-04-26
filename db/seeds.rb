@@ -18,7 +18,7 @@ cinema1.screens << screen2
 showType = ShowType.create(name: 'Standard')
 cinema1.show_types << showType
 
-TicketType.create(name: 'Normalny', price_in_eurocents: 11, show_type: showType)
+ticketType1 =TicketType.create(name: 'Normalny', price_in_eurocents: 11, show_type: showType)
 TicketType.create(name: 'Ulgowy', price_in_eurocents: 8, show_type: showType)
 
 matrix = Movie.create!(title: 'Matrix', description: 'Super Neo fighting and flying!', cover_url: 'assets/movies_covers/matrix.jpg', director: 'Andy Wachowski Lana Wachowski', duration: 120)
@@ -34,3 +34,6 @@ end
   screen1.seats << Seat.new()
   screen2.seats << Seat.new()
 end
+
+reservation = Reservation.create(show: matrix.shows.first())
+reservation.tickets << Ticket.new(ticket_type: ticketType1,seat: screen1.seats.first())
