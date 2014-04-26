@@ -1,15 +1,15 @@
 div.container
 nav.navbar.navbar-default#navigation
   div ng-controller="LoginController"
-      ul.nav.nav-pills.navbar-left
-        li.active
-          a href="/" Home
-        - if !current_user.organiser_data
-          li
-            a href="/#/movies" Movies
-        - else
-          li
-            a href="/#/cinemas" Manage cinemas
+    ul.nav.nav-pills.navbar-left
+      li.active
+        a href="/" Home
+      - if !current_user || !current_user.organiser_data
+        li
+          a href="/#/movies" Movies
+      - else
+        li
+          a href="/#/cinemas" Manage cinemas
     ul.nav.nav-pills.navbar-right
       - if !current_user.present?
         li
