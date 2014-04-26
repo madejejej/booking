@@ -1,0 +1,14 @@
+h1 Screens
+table.table.table-hover
+  thead
+    tr
+      th Name
+      th Seats
+  tbody
+    tr ng-repeat="screen in screens"
+      td
+        | {{screen.name}}
+      td
+        | {{screen.seats}}
+      td
+        a ng-click="openAddScreenDialog(screen.id)" Make Reservation
