@@ -1,11 +1,12 @@
 div.container
-nav#navigation
+nav.navbar.navbar-default#navigation
   div ng-controller="LoginController"
-    ul.nav.nav-pills
+    ul.nav.nav-pills.navbar-left
       li.active
         a href="/" Home
       li
         a href="/#/movies" Movies
+    ul.nav.nav-pills.navbar-right
       - if !current_user.present?
         li
           a href="/#/login" Login
