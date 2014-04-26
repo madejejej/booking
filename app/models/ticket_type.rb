@@ -3,5 +3,5 @@ class TicketType < ActiveRecord::Base
 
   validates :price_in_eurocents, numericality: true
   validates :show_type, presence: true
-  validates :type, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 end

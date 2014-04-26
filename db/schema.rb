@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140424105520) do
+ActiveRecord::Schema.define(version: 20140425155231) do
 
   create_table "cinemas", force: true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140424105520) do
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "director"
   end
 
   create_table "organiser_data", force: true do |t|
@@ -76,7 +77,7 @@ ActiveRecord::Schema.define(version: 20140424105520) do
   end
 
   create_table "ticket_types", force: true do |t|
-    t.string   "type"
+    t.string   "name"
     t.integer  "price_in_eurocents"
     t.integer  "show_type_id"
     t.datetime "created_at"
