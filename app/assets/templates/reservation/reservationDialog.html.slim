@@ -5,9 +5,11 @@ div
     |  * Reservation name cannot be empty
 
   p Number of seats:
-
-  input type='number' ng-model='reservation.numberOfSeats' min='0'
-  span ng-show='!reservation.numberOfSeats' class="text-danger"
+  div ng-repeat='ticket in tickets'
+    span
+      |{{ticket.name}} ( cena : {{ticket.price_in_eurocents}} zł)
+    input type='number' ng-model='ticket.count' min='0'
+  span ng-show='notPositiveNumberOfTickets()' class="text-danger"
       |  * Reservation seats must be positive value!
   div
     button type='submit' ng-click='makeReservation()' ng-disabled='!validReservationForm()' Create reservation

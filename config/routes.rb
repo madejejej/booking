@@ -9,6 +9,7 @@ Booking::Application.routes.draw do
     resources :movies do
       resources :shows do
         resources :reservations
+        resources :ticket_type
       end
     end
   end

@@ -1,22 +1,40 @@
 @controllers.controller('ReservationDialogController',
-  [ '$scope', 'movieId', 'showId', 'ShowService', ($scope, movieId, showId, ShowService) ->
-    $scope.msg = 'hejka z kontolera' + showId
+  [ '$scope','$modalInstance', 'movieId', 'showId', 'ShowService', 'TicketTypeService', ($scope, $modalInstance, movieId, showId, ShowService, TicketTypeService) ->
 
     $scope.reservation =
       booker: '',
-      numberOfSeats: 1,
       user_id : undefined
 
 
+    $scope.ticketTypes = TicketTypeService.getTicketTypes(movieId, showId, (success) ->
+      $scope.tickets = success
+    ,(error)->
+      $modalInstance.close(error)
+    )
+
     $scope.validReservationForm = () ->
       if $scope.reservation.booker is undefined then return false
-      return $scope.reservation.booker.length > 0 && $scope.reservation.numberOfSeats > 0
+      return $scope.reservation.booker.length > 0 && !$scope.notPositiveNumberOfTickets()
 
     $scope.makeReservation = () ->
-      console.log(movieId, showId)
+      reservation = $scope.reservation
+      reservation.tickets = {}
+
+      angular.forEach($scope.tickets, (ticket) ->
+        reservation.tickets[ticket.id] = numberValueOrZero(ticket.count)
+      )
       ShowService.CRUD(movieId,showId).create
         movieId: movieId
         showId: showId
-        $scope.reservation
+        reservation
 
+    $scope.notPositiveNumberOfTickets = () ->
+      allTicketsCount = 0
+      angular.forEach($scope.tickets, (ticket) ->
+        allTicketsCount += numberValueOrZero(ticket.count)
+      )
+      allTicketsCount <= 0
+
+    numberValueOrZero = (value) ->
+      if angular.isNumber(value) then value else 0
 ]);
