@@ -1,17 +1,17 @@
 div.container
 nav#navigation
-  ul.nav.nav-pills
-    li.active
-      a href="/" Home
-    li
-      a href="/#/movies" Movies
-    - if !current_user.present?
+  div ng-controller="LoginController"
+    ul.nav.nav-pills
+      li.active
+        a href="/" Home
       li
-        a href="/#/login" Login
-      li
-        a href="/#/register" Register
-    - else
-      div(ng-controller="LoginController")
-        | Welcome #{current_user.email}
-        button ng-click="logout()" Logout
+        a href="/#/movies" Movies
+      - if !current_user.present?
+        li
+          a href="/#/login" Login
+        li
+          a href="/#/register" Register
+      - else
+          li
+            a href="" ng-click="logout()" Logout
 

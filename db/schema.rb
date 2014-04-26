@@ -21,14 +21,6 @@ ActiveRecord::Schema.define(version: 20140424105520) do
     t.datetime "updated_at"
   end
 
-  create_table "movie_show_reservations", force: true do |t|
-    t.integer  "movie_show_id"
-    t.string   "booker"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "movies", force: true do |t|
     t.string   "title"
     t.text     "description"
@@ -96,7 +88,6 @@ ActiveRecord::Schema.define(version: 20140424105520) do
     t.integer  "seat_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "ticket_type"
     t.integer  "ticket_type_id"
   end
 
