@@ -1,16 +1,20 @@
-h1 Screens
 table.table.table-hover
   thead
     tr
       th Name
       th Seats
+      th
   tbody
     tr ng-repeat="screen in screens"
       td
         | {{screen.name}}
       td
         | {{screen.seats}}
-      td
+      td.right-align-class
+        button type="button" class="btn btn-default pull-right"
+          img ng-src='/assets/button_images/delete.png'
+        button type="button" class="btn btn-default pull-right"
+          img ng-src='/assets/button_images/edit.png'
     tr
-      td colspan=2 ng-click="openAddScreenDialog()"
-        | Add new screen
+      td colspan=3 ng-click="openAddScreenDialog()"
+        | + Add new screen

@@ -25,12 +25,12 @@
     .when "/movies/:movie_id/shows",
       templateUrl: "<%= asset_path("movies/shows.html") %>"
       controller: 'ShowsListingController'
-    .when "/cinemas/:cinema_id/screens.html",
-      templateUrl: "<%= asset_path("cinemas/screens.html") %>"
-      controller: 'ScreenListingController'
     .when "/movies/:movie_id",
       templateUrl: "<%= asset_path("movies/show.html") %>"
       controller: 'MovieController'
+    .when "/cinemas/:cinema_id/screens",
+      templateUrl: "<%= asset_path("cinemas/screens.html") %>"
+      controller: 'ScreenListingController'
 @App.config [
     "$httpProvider"
     ($httpProvider) ->
