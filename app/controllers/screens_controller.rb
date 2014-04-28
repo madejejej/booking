@@ -6,4 +6,15 @@ class ScreensController < ApplicationController
     respond_with @screens
   end
 
+  def create
+    screen_params.inspect
+    @screen = Screen.new(screen_params)
+    @screen.cinema_id = params[:cinema_id]
+    @screen.save
+    respond_with @screen, location: "/cinemas/#{params[:cinema_id]}/screens"
+  end
+
+  def screen_params
+    params.require(:screen).permit(:name)
+  end
 end

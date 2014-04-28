@@ -10,5 +10,14 @@
         isArray: true
     ).query()
     shows
+
+  factory.CRUD = (cinemaId) ->
+    return $resource("/api/cinemas/#{cinemaId}/screens", {},
+      create:
+        method: 'POST'
+        params:
+          cinema_id: cinemaId
+    )
+
   factory
 )
