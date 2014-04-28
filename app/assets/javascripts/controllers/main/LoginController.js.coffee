@@ -6,7 +6,7 @@
     password_confirmation: null
 
   $scope.login = () ->
-    $.post('../api/users/sign_in.json',
+    $.post('/api/users/sign_in.json',
       user:
         email: $scope.login_user.email,
         password: $scope.login_user.password
@@ -18,7 +18,7 @@
       $('#login-error').show()
     )
   $scope.logout = () ->
-    $http.delete('../api/users/sign_out.json'
+    $http.delete('/api/users/sign_out.json'
     ).success( () ->
       window.location = "/"
     )
