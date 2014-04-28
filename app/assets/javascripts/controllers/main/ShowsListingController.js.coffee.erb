@@ -17,10 +17,7 @@
                         movieId: () ->
                             $scope.movieId
                 modalInstance.result.then( (result) ->
-                    console.log('from result');
-                    console.log(result);
                     $scope.alerts.push({msg: result.message, type: result.type})
-                    console.log($scope.alerts);
                 )
 
             $scope.closeAlert = (index) ->

@@ -14,4 +14,7 @@ div
   span ng-show='notPositiveNumberOfTickets()' class="text-danger"
       |  * Reservation seats must be positive value!
   div
+    span
+      | Total price: {{totalPrice()}} zł
+  div
     button type='submit' ng-click='makeReservation()' ng-disabled='!validReservationForm()' Create reservation

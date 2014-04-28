@@ -30,12 +30,8 @@
         showId: showId
         reservation
         (success) ->
-          console.log('success');
-          console.log(success);
           $modalInstance.close({message:success.message, type: 'success'})
         (error) ->
-          console.log('error');
-          console.log(error);
           $scope.alert = ({message: error.data.message, type: 'danger'})
 
     $scope.notPositiveNumberOfTickets = () ->
@@ -54,4 +50,10 @@
     $scope.closeAlert = () ->
       $scope.alert = {}
 
+    $scope.totalPrice = () ->
+      price = 0
+      angular.forEach($scope.tickets, (ticket) ->
+        price += ticket.price_in_eurocents*numberValueOrZero(ticket.count)
+      )
+      price
 ]);

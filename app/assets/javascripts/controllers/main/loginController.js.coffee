@@ -35,7 +35,6 @@
       $scope.login_user.password = $scope.register_user.password
       $scope.login()
    ).error( (response) ->
-     console.log(response.errors)
      $scope.error = response.errors
    )
 ])
