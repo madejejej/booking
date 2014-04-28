@@ -13,18 +13,17 @@
             return $scope.screen.name.length > 0 && $scope.screen.seats > 0
 
         $scope.action = () ->
-            ScreenService.CRUD(cinemaId).create(
-                screen: $scope.screen,
-                (success) ->
-                    $scope.screen.id = success.id
-                    $modalInstance.close($scope.screen)
-                (failure) ->
-                    $modalInstance.close()
-            )
+            success = (success) ->
+                $scope.screen.id = success.id
+                $modalInstance.close($scope.screen)
+            failure = (failure) ->
+                $modalInstance.close()
+
+            ScreenService.createScreen(cinemaId, $scope.screen, success, failure)
 
 
         $scope.cancel = () ->
-            $modalInstance.dismiss()
+            $modalInstance.close()
 
 
 

@@ -11,8 +11,28 @@
                 cinemaId: () ->
                     $scope.cinemaId
         ).result.then((result) ->
+            if result is undefined then return false
             $scope.screens.push(result)
         )
+
+    $scope.openRemoveScreenDialog = (screen) ->
+        modalInstance = $modal.open(
+            templateUrl: '<%= asset_path("cinemas/screens/dialogs/removeScreenDialog.html") %>',
+            controller: 'RemoveScreenDialogController'
+            resolve:
+                cinemaId: () ->
+                    $scope.cinemaId
+                screen: () ->
+                    screen
+        ).result.then((result) ->
+            if result is undefined then return false
+            $scope.screens = $.grep($scope.screens, (e) ->
+                return e.id != result.id;
+            )
+        )
+
+
+
 
 
 

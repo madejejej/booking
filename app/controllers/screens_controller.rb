@@ -14,6 +14,10 @@ class ScreensController < ApplicationController
     respond_with @screen, location: "/cinemas/#{params[:cinema_id]}/screens"
   end
 
+  def destroy
+    @screen = Screen.find(params[:screen_id]).destroy
+    respond_with @screen, location: "/cinemas/#{params[:cinema_id]}/screens"
+  end
   def screen_params
     params.require(:screen).permit(:name)
   end
