@@ -23,6 +23,19 @@
       failureFunction
     )
 
+  factory.editScreen = (cinemaId, screen, successFunction, failureFunction) ->
+    $resource("/api/cinemas/#{cinemaId}/screens/#{screen.id}", {},
+      update:
+        method: 'PUT'
+        params:
+          cinema_id: cinemaId
+          screen_id: screen.id
+    ).update(
+      screen
+      successFunction,
+      failureFunction
+    )
+
   factory.removeScreen = (cinemaId, screen, successFunction, failureFunction) ->
     $resource("/api/cinemas/#{cinemaId}/screens/#{screen.id}", {},
       delete:
@@ -33,6 +46,6 @@
     ).delete(
       successFunction,
       failureFunction
-    )
+  )
   factory
 )

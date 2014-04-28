@@ -18,7 +18,15 @@ class ScreensController < ApplicationController
     @screen = Screen.find(params[:screen_id]).destroy
     respond_with @screen, location: "/cinemas/#{params[:cinema_id]}/screens"
   end
+
+  def update
+    @screen = Screen.find(params[:screen_id])
+    @screen.update_attributes(name: screen_params["name"])
+    respond_with @screen, location: "/cinemas/#{params[:cinema_id]}/screens"
+  end
+
   def screen_params
     params.require(:screen).permit(:name)
   end
+
 end
