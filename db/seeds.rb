@@ -7,11 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # ruby encoding: utf-8
 
+organiserData = OrganiserData.create!(name: 'akaterin@poczta.fm', description: 'ble', nip: '1234563218')
 
 
 screen1 = Screen.create!(name: "Multikino sala 2")
 
-cinema1 = Cinema.create(name: "Multikino", location: "Kraków", phone: "123456789")
+cinema1 = Cinema.create(name: "Multikino", location: "Kraków", phone: "123456789", organiser_data: organiserData)
 cinema1.screens << screen1
 
 showType = ShowType.create(name: "Normalny")

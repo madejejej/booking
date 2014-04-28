@@ -1,0 +1,22 @@
+a.btn.btn-primary.active ng-href="/cinemas/new" role="button"  Create cinema
+table.table.table-hover
+  thead
+    tr
+      th Name
+      th Address
+      th Phone
+      th
+      th
+  tbody
+    tr ng-repeat="cinema in cinemas"
+      th
+        | {{cinema.name}}
+      th
+        | {{cinema.location}}
+      th
+        | {{cinema.phone}}
+
+      th
+        a.btn.btn-default.btn-sm.active role="button" ng-href="/cinemas/update/{{cinema.id}}"  Update
+      th
+        button.btn.btn-default.btn-sm type="button" ng-click="deleteCinema(cinema)"  Delete

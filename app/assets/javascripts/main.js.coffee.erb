@@ -31,8 +31,19 @@
     .when "/cinemas/:cinema_id/screens",
       templateUrl: "<%= asset_path("cinemas/screens/index.html") %>"
       controller: 'ScreenListingController'
+    .when "/cinemas",
+      templateUrl: "<%= asset_path("cinemas/list.html") %>"
+      controller: 'CinemasListingController'
     .when "/cinemas/new",
       templateUrl: "<%= asset_path("cinemas/new.html") %>"
+      controller: 'CinemaController'
+    .when "/cinemas/:cinema_id",
+      templateUrl: "<%= asset_path("cinemas/show.html") %>"
+      controller: 'CinemaShowController'
+    .when "/cinemas/update/:cinema_id",
+      templateUrl: "<%= asset_path("cinemas/update.html") %>"
+      controller: 'CinemaUpdateController'
+
 @App.config [
     "$httpProvider"
     ($httpProvider) ->

@@ -1,22 +1,26 @@
-@controllers.controller('ReservationDialogController',
-  [ '$scope', 'movieId', 'showId', 'ShowService', ($scope, movieId, showId, ShowService) ->
-    $scope.msg = 'hejka z kontolera' + showId
+@controllers.controller('CinemaController',
+  [ '$scope', '$location', 'CinemaService', ($scope, $location, CinemaService) ->
 
-    $scope.reservation =
-      booker: '',
-      numberOfSeats: 1,
-      user_id : undefined
+    $scope.cinema =
+      name: '',
+      location: '',
+      phone: ''
 
+    $scope.validCinemaForm = () ->
+      if $scope.cinema.name is undefined or $scope.cinema.location is undefined  or $scope.cinema.phone is undefined then return false
+      return true
 
-    $scope.validReservationForm = () ->
-      if $scope.reservation.booker is undefined then return false
-      return $scope.reservation.booker.length > 0 && $scope.reservation.numberOfSeats > 0
+    $scope.createCinema = ->
+      cinema = undefined
+      CinemaService.CRUD(name, location, phone).create
+        name: $scope.cinema.name
+        location: $scope.cinema.location
+        phone: $scope.cinema.phone ,
+        (successResult) ->
+          cinema = successResult
+          window.location = "/cinemas/#{cinema.id}"
+          $scope.apply()
+      return
 
-    $scope.makeReservation = () ->
-      console.log(movieId, showId)
-      ShowService.CRUD(movieId,showId).create
-        movieId: movieId
-        showId: showId
-        $scope.reservation
 
   ]);

@@ -1,29 +1,33 @@
 class CinemasController < ApplicationController
   respond_to :json
 
-  def list
-    @cinemas = Cinema.find_by(user: current_user)
+  def index
+    @cinemas = current_user.organiser_data.cinemas
     respond_with @cinemas
   end
 
-  def create
-    @cinema = Cinema.new(params[:cinema].permit(:name, :location))
-    @cinema.organiser_data = current_user.organizer_data
-    if @cinema.save
-      redirect_to list
-    end
+  def show
+    @cinema = Cinema.find_by(id: params[:id])
+    respond_with @cinema
   end
 
-  def delete
+  def create
+    @cinema = Cinema.new(params[:cinema].permit(:name, :location, :phone))
+    @cinema.organiser_data = current_user.organiser_data
+    @cinema.save
+    respond_with @cinema
+  end
+
+  def destroy
     @cinema = Cinema.find(params[:id])
     @cinema.destroy
-    redirect_to list
+    respond_with true
   end
 
   def update
     @cinema = Cinema.find(params[:id])
-    if @cinema.update(params[:cinema].permit(:name, :location))
-      redirect_to list
+    if @cinema.update(params.permit(:id, :name, :location, :phone))
+      respond_with @cinema
     end
   end
 
