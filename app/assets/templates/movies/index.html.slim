@@ -5,7 +5,7 @@ table.table.table-hover
       th Title
       th Description
       th Duration
-      th Shows
+      th Shows in
   tbody
     tr ng-repeat="movie in movies" ng-click="viewShows(movie)"
       th
@@ -16,3 +16,6 @@ table.table.table-hover
         | {{movie.description}}
       th
         | {{movie.duration}}
+      th
+        div ng-repeat="cinema in movie.cinemas"
+          | {{cinema.name}} {{cinema.location}}

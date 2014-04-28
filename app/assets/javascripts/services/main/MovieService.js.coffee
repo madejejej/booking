@@ -7,17 +7,16 @@
       query:
         method: "GET"
         isArray: true
-    ).query(->
+    ).query((successResult)->
       angular.forEach movies, (movie) ->
         time = Date.today().addHours(Math.floor(movie.duration/60)).addMinutes(movie.duration%60)
         movie.duration = time.toString("HH:mm")
         return
-
-      successFunction() unless undefined is successFunction
+      successFunction(successResult) unless undefined is successFunction
       return
     ,
       (errorResult) ->
-        failFunction() errorResult unless undefined is failFunction
+        failFunction(errorResult) unless undefined is failFunction
         return
       )
     movies

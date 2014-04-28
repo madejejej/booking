@@ -4,6 +4,7 @@ class Show < ActiveRecord::Base
   belongs_to :show_type
 
   has_many :reservations
+  has_many :cinemas, through: :screen
 
   validates :movie, presence: true
   validates :screen, presence: true

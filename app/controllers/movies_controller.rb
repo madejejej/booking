@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
-    respond_with @movies
+    respond_with @movies, include: :cinemas
   end
 
   def show
