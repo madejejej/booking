@@ -1,12 +1,55 @@
-@controllers.controller( 'ScreenListingController',['$scope','$location', 'ScreenService',  ($scope, $location, ScreenService) ->
+@controllers.controller( 'ScreenListingController',['$scope', '$routeParams', '$modal', 'ScreenService',  ($scope, $routeParams, $modal, ScreenService) ->
 
-    $scope.screens = ScreenService.query()
+    $scope.cinemaId = $routeParams.cinema_id
+    $scope.screens = ScreenService.getCinemaScreens($scope.cinemaId)
 
     $scope.openAddScreenDialog = () ->
-#        modalInstance = $modal.open
-         #   templateUrl: '<%= asset_path("cinemas/addScreenDialog.html") %>',
-         #   controller: 'AddScreenController'
-         #   resolve:
-         #       screenId: () ->
-        console.log("openAddScreenDialog")
+        modalInstance = $modal.open(
+            templateUrl: '<%= asset_path("cinemas/screens/dialogs/screenDialog.html") %>',
+            controller: 'AddScreenDialogController'
+            resolve:
+                cinemaId: () ->
+                    $scope.cinemaId
+        ).result.then((result) ->
+            if result is undefined then return false
+            $scope.screens.push(result)
+        )
+
+    $scope.openRemoveScreenDialog = (screen) ->
+        modalInstance = $modal.open(
+            templateUrl: '<%= asset_path("cinemas/screens/dialogs/removeScreenDialog.html") %>',
+            controller: 'RemoveScreenDialogController'
+            resolve:
+                cinemaId: () ->
+                    $scope.cinemaId
+                screen: () ->
+                    screen
+        ).result.then((result) ->
+            if result is undefined then return false
+            $scope.screens = $.grep($scope.screens, (e) ->
+                return e.id != result.id;
+            )
+        )
+
+
+    $scope.openEditScreenDialog = (screen) ->
+        modalInstance = $modal.open(
+            templateUrl: '<%= asset_path("cinemas/screens/dialogs/screenDialog.html") %>',
+            controller: 'EditScreenDialogController'
+            resolve:
+                cinemaId: () ->
+                    $scope.cinemaId
+                screen: () ->
+                    screen
+        ).result.then((result) ->
+            if result is undefined then return false
+            for screen in $scope.screens
+                if screen.id == result.id
+                    screen.name = result.name
+                    screen.seats = result.seats
+
+        )
+
+
+
 ])
