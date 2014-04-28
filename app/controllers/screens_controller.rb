@@ -11,6 +11,10 @@ class ScreensController < ApplicationController
     @screen = Screen.new(screen_params)
     @screen.cinema_id = params[:cinema_id]
     @screen.save
+    params["seats"].to_i.times do
+      @screen.seats << Seat.create()
+    end
+
     respond_with @screen, location: "/cinemas/#{params[:cinema_id]}/screens"
   end
 
@@ -22,11 +26,15 @@ class ScreensController < ApplicationController
   def update
     @screen = Screen.find(params[:screen_id])
     @screen.update_attributes(name: screen_params["name"])
+    @screen.seats.destroy_all
+    params["seats"].to_i.times do
+      @screen.seats << Seat.create()
+    end
     respond_with @screen, location: "/cinemas/#{params[:cinema_id]}/screens"
   end
 
   def screen_params
-    params.require(:screen).permit(:name)
+    params.require(:screen).permit(:name, :seats)
   end
 
 end
