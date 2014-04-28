@@ -10,6 +10,12 @@ def json_response
   JSON.parse(response.body)
 end
 
+def setup_organiser_sign_in
+  data = FactoryGirl.create :organiser_data
+  user = FactoryGirl.create :user, organiser_data: data
+  sign_in user
+end
+
 # end of helper methods
 
 # Requires supporting ruby files with custom matchers and macros, etc,

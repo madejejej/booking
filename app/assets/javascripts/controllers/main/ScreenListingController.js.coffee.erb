@@ -1,0 +1,12 @@
+@controllers.controller( 'ScreenListingController',['$scope','$location', 'ScreenService',  ($scope, $location, ScreenService) ->
+
+    $scope.screens = ScreenService.query()
+
+    $scope.openAddScreenDialog = () ->
+#        modalInstance = $modal.open
+         #   templateUrl: '<%= asset_path("cinemas/addScreenDialog.html") %>',
+         #   controller: 'AddScreenController'
+         #   resolve:
+         #       screenId: () ->
+        console.log("openAddScreenDialog")
+])
