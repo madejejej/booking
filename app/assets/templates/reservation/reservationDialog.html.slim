@@ -1,4 +1,6 @@
 div
+  alert type="alert.type" close="closeAlert()" ng-show="showAlert()"
+    | {{alert.message}}
   p Reservation name:
   input type='text' ng-model='reservation.booker' ng-required='true'
   span ng-show='!reservation.booker' class="text-danger"

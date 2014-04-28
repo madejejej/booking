@@ -5,6 +5,8 @@
 
             $scope.shows = ShowService.queryShows($scope.movieId)
 
+            $scope.alerts = []
+
             $scope.openReservationDialog = (showId) ->
                 modalInstance = $modal.open
                     templateUrl: '<%= asset_path("reservation/reservationDialog.html") %>',
@@ -14,5 +16,15 @@
                             showId
                         movieId: () ->
                             $scope.movieId
+                modalInstance.result.then( (result) ->
+                    console.log('from result');
+                    console.log(result);
+                    $scope.alerts.push({msg: result.message, type: result.type})
+                    console.log($scope.alerts);
+                )
+
+            $scope.closeAlert = (index) ->
+                $scope.alerts.splice(index, 1);
+
             return
         ])

@@ -6,10 +6,12 @@
       user_id : undefined
 
 
+    $scope.alert = {}
+
     $scope.ticketTypes = TicketTypeService.getTicketTypes(movieId, showId, (success) ->
       $scope.tickets = success
     ,(error)->
-      $modalInstance.close(error)
+      $modalInstance.close({message:error, type: 'error'})
     )
 
     $scope.validReservationForm = () ->
@@ -28,9 +30,13 @@
         showId: showId
         reservation
         (success) ->
+          console.log('success');
           console.log(success);
+          $modalInstance.close({message:success.message, type: 'success'})
         (error) ->
+          console.log('error');
           console.log(error);
+          $scope.alert = ({message: error.data.message, type: 'danger'})
 
     $scope.notPositiveNumberOfTickets = () ->
       allTicketsCount = 0
@@ -41,4 +47,11 @@
 
     numberValueOrZero = (value) ->
       if angular.isNumber(value) then value else 0
+
+    $scope.showAlert = () ->
+      $scope.alert.message != undefined and $scope.alert.message != ''
+
+    $scope.closeAlert = () ->
+      $scope.alert = {}
+
 ]);

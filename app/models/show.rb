@@ -14,7 +14,7 @@ class Show < ActiveRecord::Base
   end
 
   def available_seats_ids
-    screen.seats.select(:id).map(&:id) - reservations.map(&:seats).flatten.map(&:id)
+    screen.seats.ids - reservations.map(&:seats).flatten.map(&:id)
   end
 
   def number_of_free_seats
