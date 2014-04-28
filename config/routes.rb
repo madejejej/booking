@@ -12,6 +12,11 @@ Booking::Application.routes.draw do
         resources :ticket_type
       end
     end
+
+    resources :cinemas do
+      resources :screens
+    end
+
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
