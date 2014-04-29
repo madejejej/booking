@@ -26,9 +26,8 @@ class CinemasController < ApplicationController
 
   def update
     @cinema = Cinema.find(params[:id])
-    if @cinema.update(params.permit(:id, :name, :location, :phone))
-      respond_with @cinema
-    end
+    @cinema.update_attributes(params.permit(:name, :location, :phone))
+    respond_with @cinema
   end
 
 end
