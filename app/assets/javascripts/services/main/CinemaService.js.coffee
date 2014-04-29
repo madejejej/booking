@@ -19,7 +19,9 @@
           name: cinema.name
           location: cinema.location
           phone: cinema.phone
-    ).query()
+    ).query( () ->
+      window.location = "/cinemas/"
+    )
 
   factory.getCinema = (cinemaId) ->
     return $resource("/api/cinemas/#{cinemaId}", {},

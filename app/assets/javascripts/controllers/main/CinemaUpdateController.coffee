@@ -5,6 +5,5 @@
 
     $scope.updateCinema = () ->
       CinemaService.updateCinema($scope.cinema)
-      window.location = "/cinemas/"
-      $scope.apply()
   ])
+
