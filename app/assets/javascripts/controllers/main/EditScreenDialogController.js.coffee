@@ -3,11 +3,8 @@
 
     $scope.header= "Edit screen"
     $scope.button_text = "Edit"
-    $scope.oldScreen = screen
-    $scope.screen =
-      id: $scope.oldScreen.id
-      seats: 0
-      name: ""
+
+    $scope.screen = screen
 
     $scope.validScreenForm = () ->
       if $scope.screen.name is undefined then return false
@@ -19,7 +16,6 @@
       failure = (failure) ->
         $modalInstance.close()
       ScreenService.editScreen(cinemaId, $scope.screen, success, failure)
-
 
     $scope.cancel = () ->
       $modalInstance.close()
