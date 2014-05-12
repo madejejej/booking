@@ -8,5 +8,5 @@ Feature: Registration system
     Given I’m on the "register" page
     When I provide my email and confirm my password
     And I press the "Register" button
-    Then I should have a registered account
-    And I should be logged in
+    Then I should be logged in
+    And I should have a registered account
