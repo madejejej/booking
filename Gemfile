@@ -26,12 +26,13 @@ gem 'factory_girl_rails'
 group :development, :test do
   gem 'rspec-rails'
   gem 'cucumber-rails', require: false
-  gem 'selenium-webdriver'
+  gem 'poltergeist'
   gem 'database_cleaner'
 end
 
 group :test do
   gem 'shoulda'
+  gem 'rake'
 end
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
