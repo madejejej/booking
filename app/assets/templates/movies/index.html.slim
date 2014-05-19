@@ -6,8 +6,10 @@ table.table.table-hover
       th Description
       th Duration
       th Shows in
+      th Movie details
+      th Available shows
   tbody
-    tr ng-repeat="movie in movies" ng-click="viewShows(movie)"
+    tr ng-repeat="movie in movies"
       th
         img ng-src='{{movie.cover_url}}' width="50" height="50"
       th
@@ -19,4 +21,7 @@ table.table.table-hover
       th
         div ng-repeat="cinema in movie.cinemas"
           | {{cinema.name}} {{cinema.location}}
-
+      th
+        a ng-href="/#/movies/{{movie.id}}" Details
+      th
+        a ng-click="viewShows(movie)" Shows
