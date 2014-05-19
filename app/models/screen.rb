@@ -17,5 +17,18 @@ class Screen < ActiveRecord::Base
     shows.select { |show| not( show.end_date < start_date or show.date > end_date)}.empty?
   end
 
+  def add_show(movie_id, show_type_id, datetime)
+
+    movie = Movie.find(movie_id)
+    raise 'No such movie exists!' if movie.nil?
+    show_type = ShowType.find(show_type_id)
+    raise 'No such show type exists!' if show_type.nil?
+
+    raise 'During that time screen is displaying another show already!' unless can_play_movie(datetime, datetime+movie.duration.minutes)
+
+    shows << Show.new(movie: movie,show_type: show_type, date: datetime )
+
+  end
+
 
 end

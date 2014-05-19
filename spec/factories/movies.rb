@@ -5,5 +5,6 @@ FactoryGirl.define do
     title "MyString"
     description "MyText"
     cover_url "MyString"
+    duration 120
   end
 end

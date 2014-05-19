@@ -48,7 +48,49 @@ describe Screen do
 
         @screen.can_play_movie(start_date,end_date).should be_false
       end
+  end
 
+  describe 'add_show' do
+    @screen
+    let(:movie_id) { 1 }
+    let(:show_type_id) { 1 }
+    let(:datetime) { DateTime.new(2011,10,10,13,0,0) }
 
+    before do
+      @screen = Screen.new
+      existing_show = FactoryGirl.create :show
+      existing_show.date = DateTime.new(2011,10,10,14,0,0)
+      existing_show.movie.duration = 120
+      @screen.shows << existing_show
     end
+
+    it 'should throw exception if no movie found' do
+      Movie.should_receive(:find).and_return(nil)
+
+      expect { screen.add_show(movie_id, show_type_id, datetime) }.to raise_error
+    end
+
+    it 'should throw exception when no show type found' do
+      ShowType.should_receive(:find).and_return(nil)
+      Movie.should_receive(:find).and_return(FactoryGirl.build :movie)
+
+      expect { screen.add_show(movie_id, show_type_id, datetime) }.to raise_error
+    end
+
+    it 'should throw exception when cannot play movie at that date' do
+      ShowType.should_receive(:find).and_return(FactoryGirl.build :show_type)
+      Movie.should_receive(:find).and_return(FactoryGirl.build :movie)
+
+      screen.stub(:can_play_movie).with(false)
+      expect { screen.add_show(movie_id, show_type_id, datetime) }.to raise_error
+    end
+
+    it 'should create new show ' do
+      ShowType.should_receive(:find).and_return(FactoryGirl.build :show_type)
+      Movie.should_receive(:find).and_return(FactoryGirl.build :movie)
+
+      screen.stub(:can_play_movie).with(true)
+      expect { screen.add_show(movie_id, show_type_id, datetime) }.not_to raise_error
+    end
+  end
 end
