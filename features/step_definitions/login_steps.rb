@@ -35,10 +35,11 @@ end
 
 
 Then(/^I should have a registered account$/) do
-  User.last.email.should eq "user@example.com"
+  User.find_by(email: "user@example.com").should_not be_nil
 end
 
 Then(/^I should be logged in$/) do
   page.has_content?("Welcome").should be_true
+  page.has_content?("user@example.com").should be_true
 end
 

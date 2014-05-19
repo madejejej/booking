@@ -9,11 +9,11 @@ table.table.table-hover
       th
   tbody
     tr ng-repeat="cinema in cinemas"
-      th
+      th ng-click="view(cinema)"
         | {{cinema.name}}
-      th
+      th ng-click="view(cinema)"
         | {{cinema.location}}
-      th
+      th ng-click="view(cinema)"
         | {{cinema.phone}}
 
       th

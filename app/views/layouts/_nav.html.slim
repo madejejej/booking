@@ -17,6 +17,8 @@ nav.navbar.navbar-default#navigation
         li
           a href="/#/register" Register
       - else
-          li
-            a href="" ng-click="logout()" Logout
+        li
+          p= "Welcome #{current_user.email}"
+        li
+          a href="" ng-click="logout()" Logout
 
