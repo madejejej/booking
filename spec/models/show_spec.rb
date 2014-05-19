@@ -32,7 +32,6 @@ describe Show do
     end
 
     it 'should return number of available seats to book' do
-      #show.number_of_free_seats.should eq show.screen.seats.count - show.reservations.map(&:tickets).flatten.count
       show.number_of_free_seats.should eq 2
     end
 
