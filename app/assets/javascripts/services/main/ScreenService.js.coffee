@@ -3,12 +3,16 @@
   factory = {}
 
 
-  factory.getCinemaScreens = (cinemaId) ->
+  factory.getCinemaScreens = (cinemaId, successFunction , errorFunction ) ->
     shows = $resource("/api/cinemas/#{cinemaId}/screens", {},
       query:
         method: "GET"
         isArray: true
-    ).query()
+    ).query((success) ->
+      successFunction(success) unless undefined is successFunction
+    , (error) ->
+      errorFunction(error) unless undefined is errorFunction
+    )
     shows
 
   factory.createScreen= (cinemaId, screen, successFunction, failureFunction) ->

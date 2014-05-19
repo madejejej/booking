@@ -1,8 +1,13 @@
-@controllers.controller( 'ScreenListingController',['$scope', '$routeParams', '$modal', 'ScreenService',  ($scope, $routeParams, $modal, ScreenService) ->
+@controllers.controller( 'ScreenListingController',['$scope', '$routeParams', '$modal', 'ScreenService', 'CinemaService',  ($scope, $routeParams, $modal, ScreenService, CinemaService) ->
 
     $scope.cinemaId = $routeParams.cinema_id
-    $scope.screens = ScreenService.getCinemaScreens($scope.cinemaId)
+    CinemaService.getCinema($routeParams.cinema_id, (success) ->
+        $scope.cinema = success
+        $scope.screens = ScreenService.getCinemaScreens($routeParams.cinema_id)
+    ,(error) ->
+    )
 
+    console.log($scope.cinemaId);
     $scope.openAddScreenDialog = () ->
         modalInstance = $modal.open(
             templateUrl: '<%= asset_path("cinemas/screens/dialogs/screenDialog.html") %>',

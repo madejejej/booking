@@ -7,8 +7,12 @@ class CinemasController < ApplicationController
   end
 
   def show
-    @cinema = Cinema.find_by(id: params[:id])
-    respond_with @cinema
+    begin
+      @cinema = Cinema.find(params[:id])
+      respond_with @cinema
+    rescue Exception => e
+      render json: {message: e.message}, status: :unprocessable_entity # TODO change to proper http response
+    end
   end
 
   def create

@@ -1,4 +1,7 @@
-table.table.table-hover
+div ng-show="cinema == null"
+  | Nie ma takiego kina, więc tym bardziej sal!
+
+table.table.table-hover ng-show="cinema != null"
   thead
     tr
       th Name
