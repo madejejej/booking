@@ -22,6 +22,6 @@ table.table.table-hover
         div ng-repeat="cinema in movie.cinemas"
           | {{cinema.name}} {{cinema.location}}
       th
-        a ng-href="/#/movies/{{movie.id}}" Details
+        a ng-click="showDetails(movie)" Details
       th
         a ng-click="viewShows(movie)" Shows

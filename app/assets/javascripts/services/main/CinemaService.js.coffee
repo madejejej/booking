@@ -28,9 +28,9 @@
       query:
         method: "GET"
     ).query((success) ->
-      successFunction(success)
+      successFunction(success) unless  undefined is successFunction
     ,(error) ->
-      errorFunction(error)
+      errorFunction(error) unless  undefined is errorFunction
     )
 
   factory.deleteCinema = (cinemaId) ->

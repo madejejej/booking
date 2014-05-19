@@ -7,7 +7,6 @@
     ,(error) ->
     )
 
-    console.log($scope.cinemaId);
     $scope.openAddScreenDialog = () ->
         modalInstance = $modal.open(
             templateUrl: '<%= asset_path("cinemas/screens/dialogs/screenDialog.html") %>',
