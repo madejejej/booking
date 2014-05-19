@@ -1,4 +1,6 @@
 div.modal-header
+  div ng-show='errorOccurred' style='color: red'
+    | An error has occurred. Please try again later.
   | {{header}}
 div.modal-body
   div.form-group
@@ -16,5 +18,5 @@ div.modal-body
     |  * A positive amount of seats is required!
 
 div.modal-footer
-  button.btn-default.btn type='submit' ng-click='cancel()' Cancel
-  button.btn-success.btn type='submit' ng-click='action()' ng-disabled='!validScreenForm()' {{button_text}}
+  button.btn-default.btn type='submit' ng-click='cancel()' ng-disabled='areButtonsDisabled && !errorOccurred'Cancel
+  button.btn-success.btn type='submit' ng-click='action()' ng-disabled='!validScreenForm() || areButtonsDisabled' {{button_text}}

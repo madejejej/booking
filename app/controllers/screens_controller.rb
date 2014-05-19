@@ -7,15 +7,14 @@ class ScreensController < ApplicationController
   end
 
   def create
-    screen_params.inspect
     @screen = Screen.new(screen_params)
     @screen.cinema_id = params[:cinema_id]
     @screen.save
     params["seats"].to_i.times do
       @screen.seats << Seat.create()
     end
-
-    respond_with @screen, location: "/cinemas/#{params[:cinema_id]}/screens"
+    @cinema = @screen.cinema
+    respond_with @cinema, @screen
   end
 
   def destroy
@@ -30,7 +29,8 @@ class ScreensController < ApplicationController
     params["seats"].to_i.times do
       @screen.seats << Seat.create()
     end
-    respond_with @screen, location: "/cinemas/#{params[:cinema_id]}/screens"
+    @cinema = @screen.cinema
+    respond_with @cinema, @screen
   end
 
   def screen_params
