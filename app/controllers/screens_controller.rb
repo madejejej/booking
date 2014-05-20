@@ -7,7 +7,7 @@ class ScreensController < ApplicationController
       @screens = Screen.all_screens_for_cinema_with_seat_count(params[:cinema_id])
       respond_with @screens
     rescue Exception => error
-      render json: {message: error.message}, status: :unprocessable_entity # TODO change to proper http response
+      render json: {message: error.message}, status: :not_found
     end
   end
 

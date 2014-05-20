@@ -11,7 +11,7 @@ class CinemasController < ApplicationController
       @cinema = Cinema.find(params[:id])
       respond_with @cinema
     rescue Exception => e
-      render json: {message: e.message}, status: :unprocessable_entity # TODO change to proper http response
+      render json: {message: e.message}, status: :not_found
     end
   end
 
