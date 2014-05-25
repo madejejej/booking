@@ -8,11 +8,14 @@
 
 @App = angular.module('App', ['App.services','App.controllers','ngRoute'])
 
-@App.config ($routeProvider, $locationProvider) ->
+@App.config ($httpProvider, $routeProvider, $locationProvider) ->
+  $httpProvider.interceptors.push('httpRequestInterceptor')
   $locationProvider.html5Mode(true)
   $routeProvider
     .when "/",
       templateUrl: "<%= asset_path("home.html") %>"
+    .when "/404",
+      templateUrl: "<%= asset_path("404.html") %>"
     .when "/login",
       templateUrl: "<%= asset_path("login.html") %>"
       controller: 'LoginController'
@@ -42,8 +45,10 @@
       controller: 'CinemaShowController'
     .when "/cinemas/update/:cinema_id",
       templateUrl: "<%= asset_path("cinemas/update.html") %>"
-      controller: 'CinemaUpdateController'
-
+      controller: 'CinemaUpdateController',
+    .when "/cinemas/:cinema_id/screens/:screen_id/seats",
+      templateUrl: "<%= asset_path("cinemas/screens/seats/index.html") %>"
+      controller: 'SeatEditingController'
 @App.config [
     "$httpProvider"
     ($httpProvider) ->
