@@ -7,30 +7,43 @@ class ScreensController < ApplicationController
   end
 
   def create
-    @screen = Screen.new(screen_params)
-    @screen.cinema_id = params[:cinema_id]
-    @screen.save
-    params["seats"].to_i.times do
-      @screen.seats << Seat.create()
+    ActiveRecord::Base.transaction do
+      @screen = Screen.new(screen_params)
+      @screen.cinema_id = params[:cinema_id]
+      @screen.save
+      params["seats"].to_i.times do
+        seat = Seat.new
+        seat.screen = @screen
+        seat.save
+      end
     end
     @cinema = @screen.cinema
     respond_with @cinema, @screen
+
   end
 
   def destroy
     @screen = Screen.find(params[:screen_id]).destroy
-    respond_with @screen, location: "/cinemas/#{params[:cinema_id]}/screens"
+    @cinema = @screen.cinema
+    respond_with @cinema, @screen
   end
 
   def update
     @screen = Screen.find(params[:screen_id])
-    @screen.update_attributes(name: screen_params["name"])
-    @screen.seats.destroy_all
-    params["seats"].to_i.times do
-      @screen.seats << Seat.create()
+    ActiveRecord::Base.transaction do
+      @screen.update_attributes(name: screen_params["name"])
+      @screen.seats.destroy_all
+      @screen.save
+
+      params["seats"].to_i.times do
+        seat = Seat.new
+        seat.screen = @screen
+        seat.save
+      end
+      @cinema = @screen.cinema
+      respond_with @cinema, @screen
     end
-    @cinema = @screen.cinema
-    respond_with @cinema, @screen
+
   end
 
   def screen_params
