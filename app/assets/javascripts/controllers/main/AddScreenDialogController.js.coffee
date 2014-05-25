@@ -6,13 +6,12 @@
         $scope.screen =
             id: -1
             name: '',
-            seats: 0
         $scope.areButtonsDisabled = false;
         $scope.errorOccurred = false;
 
         $scope.validScreenForm = () ->
             if $scope.screen.name is undefined then return false
-            return $scope.screen.name.length > 0 && $scope.screen.seats > 0
+            return $scope.screen.name.length > 0
 
         $scope.action = () ->
             $scope.areButtonsDisabled = true;

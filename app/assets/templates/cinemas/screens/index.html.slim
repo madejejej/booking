@@ -12,9 +12,11 @@ table.table.table-hover
         | {{screen.seats}}
       td.right-align-class
         button type="button" class="btn btn-default pull-right" ng-click="openRemoveScreenDialog(screen)"
-          span class='glyphicon glyphicon-remove'
+          | Remove screen
         button type="button" class="btn btn-default pull-right" ng-click="openEditScreenDialog(screen)"
-          span class='glyphicon glyphicon-search'
+          | Edit name
+        button type="button" class="btn btn-default pull-right" ng-click="editSeatLayout(screen)"
+          | Edit seat layout
     tr
       td colspan=3 style="cursor: pointer;" ng-click="openAddScreenDialog()"
         span class="glyphicon glyphicon-plus"

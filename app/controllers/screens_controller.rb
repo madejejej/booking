@@ -7,16 +7,9 @@ class ScreensController < ApplicationController
   end
 
   def create
-    ActiveRecord::Base.transaction do
-      @screen = Screen.new(screen_params)
-      @screen.cinema_id = params[:cinema_id]
-      @screen.save
-      params["seats"].to_i.times do
-        seat = Seat.new
-        seat.screen = @screen
-        seat.save
-      end
-    end
+    @screen = Screen.new(screen_params)
+    @screen.cinema_id = params[:cinema_id]
+    @screen.save
     @cinema = @screen.cinema
     respond_with @cinema, @screen
 
@@ -30,19 +23,10 @@ class ScreensController < ApplicationController
 
   def update
     @screen = Screen.find(params[:screen_id])
-    ActiveRecord::Base.transaction do
-      @screen.update_attributes(name: screen_params["name"])
-      @screen.seats.destroy_all
-      @screen.save
-
-      params["seats"].to_i.times do
-        seat = Seat.new
-        seat.screen = @screen
-        seat.save
-      end
-      @cinema = @screen.cinema
-      respond_with @cinema, @screen
-    end
+    @screen.update_attributes(name: screen_params["name"])
+    @screen.save
+    @cinema = @screen.cinema
+    respond_with @cinema, @screen
 
   end
 
