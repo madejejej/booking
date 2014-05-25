@@ -23,7 +23,7 @@
       templateUrl: "<%= asset_path("register.html") %>"
       controller: 'LoginController'
     .when "/movies",
-      templateUrl: "<%= asset_path("movies/index.html") %>"
+      templateUrl: "<%= asset_path("movies/index.html.slim") %>"
       controller: 'MoviesListingController'
     .when "/movies/:movie_id/shows",
       templateUrl: "<%= asset_path("movies/shows.html") %>"
@@ -32,7 +32,7 @@
       templateUrl: "<%= asset_path("movies/show.html") %>"
       controller: 'MovieController'
     .when "/cinemas/:cinema_id/screens",
-      templateUrl: "<%= asset_path("cinemas/screens/index.html") %>"
+      templateUrl: "<%= asset_path("cinemas/screens/index.html.slim") %>"
       controller: 'ScreenListingController'
     .when "/cinemas",
       templateUrl: "<%= asset_path("cinemas/list.html") %>"
@@ -47,7 +47,7 @@
       templateUrl: "<%= asset_path("cinemas/update.html") %>"
       controller: 'CinemaUpdateController',
     .when "/cinemas/:cinema_id/screens/:screen_id/seats",
-      templateUrl: "<%= asset_path("cinemas/screens/seats/index.html") %>"
+      templateUrl: "<%= asset_path("cinemas/screens/seats/index.html.slim") %>"
       controller: 'SeatEditingController'
 @App.config [
     "$httpProvider"
