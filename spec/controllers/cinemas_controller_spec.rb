@@ -31,13 +31,9 @@ describe CinemasController do
 
     context "for the logged in organiser" do
       let!(:user) { setup_organiser_sign_in }
-      let!(:cinemas) { FactoryGirl.create_list(:cinema, 3, organiser_data: user.organiser_data) }
+      let!(:cinemas) { FactoryGirl.create_list(:cinema, 3) }
       before do
         get :index, format: :json
-      end
-
-      it "retrieves all cinemas" do
-        assigns(:cinemas).should eq cinemas
       end
 
       it "ends with success" do

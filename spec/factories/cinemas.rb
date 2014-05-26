@@ -5,5 +5,6 @@ FactoryGirl.define do
     name "MyString"
     location "MyString"
     phone "MyString"
+    association :organiser_data, factory: :organiser_data
   end
 end

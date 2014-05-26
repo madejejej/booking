@@ -34,22 +34,25 @@ describe Show do
     it 'should return number of available seats to book' do
       show.number_of_free_seats.should eq 2
     end
-  end
 
-  describe 'end_date' do
+    describe 'end_date' do
 
-    it 'should count show end datetime' do
-      movie = Movie.new(duration: 90)
-      show = Show.new(date: DateTime.new(2010,10,10,16,30), movie:movie)
+      it 'should count show end datetime' do
+        movie = Movie.new(duration: 90)
+        show = Show.new(date: DateTime.new(2010,10,10,16,30), movie:movie)
 
-      show.end_date.should eq show.date+show.movie.duration.minutes
+        show.end_date.should eq show.date+show.movie.duration.minutes
+      end
+
+      it 'return available seats ids' do
+        show.available_seats_ids.should eq (@seats_ids - [@seats_ids[0]])
+      end
+
     end
 
-    it 'return available seats ids' do
-      show.available_seats_ids.should eq (@seats_ids - [@seats_ids[0]])
-    end
-
   end
+
+
 
 end
 
