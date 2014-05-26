@@ -20,6 +20,12 @@ class ScreensController < ApplicationController
     respond_with @cinema, @screen
   end
 
+  def show
+    @screen = Cinema.find(params[:cinema_id]).screens.find(params[:id])
+    @cinema = @screen.cinema
+    respond_with @cinema, @screen
+  end
+
   def update
     @screen = Screen.find(params[:screen_id])
     @screen.update_attributes(name: screen_params["name"])

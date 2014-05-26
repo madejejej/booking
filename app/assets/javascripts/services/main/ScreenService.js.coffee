@@ -17,6 +17,18 @@
     )
     screens
 
+  factory.getScreen = (cinemaId, screenId, successFunction, failFunction) ->
+    screen = $resource("/api/cinemas/#{cinemaId}/screens/#{screenId}", {},
+      query:
+        method: "GET"
+    ).query(
+      (response) ->
+        successFunction(response) unless undefined is successFunction
+      (response) ->
+        failFunction(response) unless undefined is failFunction
+    )
+    screen
+
   factory.createScreen= (cinemaId, screen, successFunction, failFunction) ->
     $resource("/api/cinemas/#{cinemaId}/screens", {},
       create:

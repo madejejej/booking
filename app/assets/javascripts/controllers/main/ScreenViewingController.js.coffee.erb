@@ -1,0 +1,80 @@
+@controllers.controller( 'ScreenViewingController',
+['$scope', '$modal', '$location', '$window', '$routeParams', 'SeatService', 'ScreenService'
+($scope, $modal, $location, $window, $routeParams, SeatService, ScreenService) ->
+  window.scope = $scope
+
+  $scope.screen = ScreenService.getScreen($routeParams.cinema_id, $routeParams.screen_id
+  (response) ->
+    $scope.redraw()
+  (response) ->
+    $modal.open(
+      templateUrl: '<%= asset_path("modals/sadModal.html") %>',
+      controller: 'SimpleDialogController'
+    ).result.then(() ->
+      $location.path("/cinemas/#{$routeParams.cinema_id}/screens")
+    )
+  )
+  $scope.seats = SeatService.getSeats($routeParams.cinema_id, $routeParams.screen_id,
+  (response) ->
+    $scope.redraw()
+  (response) ->
+    $modal.open(
+      templateUrl: '<%= asset_path("modals/sadModal.html") %>',
+      controller: 'SimpleDialogController'
+    ).result.then(() ->
+      $location.path("/cinemas/#{$routeParams.cinema_id}/screens")
+    )
+  )
+
+  $scope.canvas = document.getElementById("seat-canvas")
+  $scope.context = $scope.canvas.getContext("2d")
+
+  $scope.redraw = () ->
+    $scope.canvas.width = $('#seat-canvas-container').width()
+    $scope.canvas.height = $('#seat-canvas-container').height()
+    $scope.context.fillStyle = "black"
+    $scope.context.rect($scope.canvas.width/20, $scope.canvas.height/20, (18*$scope.canvas.width)/20, (18*$scope.canvas.height)/20)
+    $scope.context.fill()
+    drawScreen()
+    drawRoom()
+    drawOther()
+
+  drawScreen = () ->
+    $scope.context.fillStyle = "lightblue"
+    $scope.context.fillRect($scope.canvas.width/20, $scope.canvas.height/20, (18*$scope.canvas.width)/20, (2*$scope.canvas.height)/20)
+    $scope.context.font = "2em Arial";
+    $scope.context.fillStyle= "black"
+    $scope.context.textAlign = "center"
+    $scope.context.fillText("Screen", $scope.canvas.width/2, 2.5*$scope.canvas.height/20)
+
+  drawRoom = () ->
+    for seat in $scope.seats
+      rect = roomCoordToScreen(seat)
+      $scope.context.beginPath()
+      $scope.context.rect(rect.x, rect.y, rect.width, rect.height)
+      $scope.context.fillStyle = 'green'
+      $scope.context.strokeStyle = 'black'
+      $scope.context.fill()
+      $scope.context.stroke()
+
+  roomCoordToScreen = (coord) ->
+    x = $scope.canvas.width/20+ (((18*$scope.canvas.width)/20)/$scope.screen.width)*coord.x - ((18*$scope.canvas.width)/20)/$scope.screen.width
+    y = 5*$scope.canvas.height/20 +(((14*$scope.canvas.height)/20)/$scope.screen.height)*coord.y - ((14*$scope.canvas.height)/20)/$scope.screen.height
+    width = ((18*$scope.canvas.width)/20)/$scope.screen.width
+    height = ((14*$scope.canvas.height)/20)/$scope.screen.height
+    rect =
+      x: x,
+      y: y,
+      width: width,
+      height: height
+    return rect
+
+  drawOther = () ->
+    $scope.context.font = "1em Arial";
+    $scope.context.fillStyle= "black"
+    $scope.context.textAlign = "center"
+    $scope.context.fillText($scope.screen.height.toString(), $scope.canvas.width/40, $scope.canvas.height/2)
+    $scope.context.fillText($scope.screen.width.toString(), $scope.canvas.width/2, (39*$scope.canvas.height)/40)
+
+  angular.element($window).bind 'resize', $scope.redraw
+])

@@ -8,9 +8,11 @@
         method: "GET"
         isArray: true
     ).query(
-      successFunction(response) unless undefined is successFunction
-    ,
-      failFunction(response) unless undefined is failFunction
+      (response) ->
+        successFunction(response) unless undefined is successFunction
+      ,
+      (response) ->
+        failFunction(response) unless undefined is failFunction
     )
     seats
 
