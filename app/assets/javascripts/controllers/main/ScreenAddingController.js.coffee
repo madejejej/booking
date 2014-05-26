@@ -1,4 +1,4 @@
-@controllers.controller('AddScreenDialogController',
+@controllers.controller('ScreenAddingController',
     [ '$scope', '$modalInstance', 'cinemaId', 'ScreenService', ($scope, $modalInstance, cinemaId, ScreenService) ->
 
         $scope.header= "Add screen"
