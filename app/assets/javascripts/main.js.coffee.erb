@@ -9,13 +9,10 @@
 @App = angular.module('App', ['App.services','App.controllers','ngRoute'])
 
 @App.config ($httpProvider, $routeProvider, $locationProvider) ->
-  $httpProvider.interceptors.push('httpRequestInterceptor')
   $locationProvider.html5Mode(true)
   $routeProvider
     .when "/",
       templateUrl: "<%= asset_path("home.html") %>"
-    .when "/404",
-      templateUrl: "<%= asset_path("404.html") %>"
     .when "/login",
       templateUrl: "<%= asset_path("login.html") %>"
       controller: 'LoginController'
