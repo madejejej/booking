@@ -1,4 +1,4 @@
-@controllers.controller( 'SeatEditingController',['$scope', '$window', '$routeParams', 'SeatService', ($scope, $window, $routeParams, SeatService) ->
+@controllers.controller( 'SeatEditingController',['$scope', '$location', '$window', '$routeParams', 'SeatService', ($scope, $location, $window, $routeParams, SeatService) ->
   window.scope = $scope
   $scope.seats = SeatService.getSeats($routeParams.cinema_id, $routeParams.screen_id)
   $scope.newSeats = []
@@ -95,6 +95,20 @@
     $scope.redraw();
 
     return
+  $scope.createSeatLayout = () ->
+    success = (success) ->
+
+      $location.path( "/cinemas/#{$routeParams.cinema_id}/screens")
+    failure = (failure) ->
+    SeatService.createSeats(
+      $routeParams.cinema_id,
+      $routeParams.screen_id,
+      $scope.newSeats,
+      $scope.layout,
+      success,
+      failure
+    )
+
 
   angular.element($window).bind 'resize', $scope.redraw
   $scope.createSeats();

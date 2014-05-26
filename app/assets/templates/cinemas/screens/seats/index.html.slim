@@ -9,10 +9,5 @@ div.form-group
   label for="rowRange"
     | Rows
   input type="range" id="rowRange" min=1 value=15 ng-model='layout.rows' ng-change='createSeats()'
-/div.form-group style="width: 50%" class="pull-right"
-/  div style="text-align:center;"
-/    input type="radio" name="group1" value="Krzesło"
-/      | Krzesło
-/  div style="text-align:center;"
-/    input type="radio" name="group1" value="Brak"
-/      | Brak krzesła
+div.form-group
+  button.btn-default.btn type='submit' ng-click='createSeatLayout()' Submit
