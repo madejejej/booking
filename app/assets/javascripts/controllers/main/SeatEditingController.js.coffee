@@ -77,6 +77,9 @@
   $scope.select = (event) ->
     x = event.offsetX
     y = event.offsetY
+    if(x is undefined)
+      x = event.pageX-$('#seat-canvas').offset().left;
+      y = event.pageY-$('#seat-canvas').offset().top;
     $scope.coord = screenCoordToRoom({x: x, y: y})
     find = null
     for i in [1..$scope.newSeats.length] by 1
