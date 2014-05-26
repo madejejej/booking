@@ -1,2 +1,18 @@
-div id="seat-canvas-container"
-    canvas id="seat-canvas" ng-click="draw($event)"
+
+div id="seat-canvas-container" style="width: 100%; height: 500px;"
+  canvas id="seat-canvas" ng-click="select($event)"
+div.form-group
+  /style="width: 50%" class="pull-left"
+  label for="colRange"
+    | Columns
+  input type="range" id="colRange" min=1 value=15 ng-model='layout.columns' ng-change='createSeats()'
+  label for="rowRange"
+    | Rows
+  input type="range" id="rowRange" min=1 value=15 ng-model='layout.rows' ng-change='createSeats()'
+/div.form-group style="width: 50%" class="pull-right"
+/  div style="text-align:center;"
+/    input type="radio" name="group1" value="Krzesło"
+/      | Krzesło
+/  div style="text-align:center;"
+/    input type="radio" name="group1" value="Brak"
+/      | Brak krzesła

@@ -9,9 +9,11 @@
         method: "GET"
         isArray: true
     ).query(
-      successFunction(response) unless undefined is successFunction
-    ,
-      failFunction(response) unless undefined is failFunction
+      (response) ->
+        successFunction(response) unless undefined is successFunction
+      ,
+      (response) ->
+        failFunction(response) unless undefined is failFunction
     )
     screens
 
@@ -23,12 +25,14 @@
           cinema_id: cinemaId
     ).create(
       screen,
-      successFunction(response) unless undefined is successFunction
-    ,
-      failFunction(response) unless undefined is failFunction
+      (response) ->
+        successFunction(response) unless undefined is successFunction
+      ,
+      (response) ->
+        failFunction(response) unless undefined is failFunction
     )
 
-  factory.editScreen = (cinemaId, screen, successFunction, faileFunction) ->
+  factory.editScreen = (cinemaId, screen, successFunction, failFunction) ->
     $resource("/api/cinemas/#{cinemaId}/screens/#{screen.id}", {},
       update:
         method: 'PUT'
@@ -37,9 +41,11 @@
           screen_id: screen.id
     ).update(
       screen
-      successFunction(response) unless undefined is successFunction
-    ,
-      failFunction(response)  unless undefined is failFunction
+      (response) ->
+        successFunction(response) unless undefined is successFunction
+      ,
+      (response) ->
+        failFunction(response) unless undefined is failFunction
     )
 
   factory.removeScreen = (cinemaId, screen, successFunction, failFunction) ->
@@ -50,9 +56,11 @@
           cinema_id: cinemaId
           screen_id: screen.id
     ).delete(
-      successFunction(response)  unless undefined is successFunction
-    ,
-      failFunction(response)  unless undefined is failFunction
+      (response) ->
+        successFunction(response) unless undefined is successFunction
+      ,
+      (response) ->
+        failFunction(response) unless undefined is failFunction
   )
   factory
 )
