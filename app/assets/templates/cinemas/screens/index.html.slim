@@ -5,7 +5,7 @@ table.table.table-hover
       th Seats
       th
   tbody
-    tr ng-repeat="screen in screens" ng-click="viewScreen(screen)"
+    tr ng-repeat="screen in screens"
       td
         | {{screen.name}}
       td
@@ -15,6 +15,8 @@ table.table.table-hover
           | Remove screen
         button type="button" class="btn btn-default pull-right" ng-click="openEditScreenDialog(screen)"
           | Edit name
+        button type="button" class="btn btn-default pull-right" ng-click="viewScreen(screen)"
+          | View layout
     tr
       td colspan=3 style="cursor: pointer;" ng-click="addScreen()"
         span class="glyphicon glyphicon-plus"

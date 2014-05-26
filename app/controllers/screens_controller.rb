@@ -30,7 +30,7 @@ class ScreensController < ApplicationController
   end
 
   def screen_params
-    params.require(:screen).permit(:name, :seats)
+    params.require(:screen).permit(:name)
   end
 
 end

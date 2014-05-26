@@ -43,10 +43,10 @@
     .when "/cinemas/update/:cinema_id",
       templateUrl: "<%= asset_path("cinemas/update.html") %>"
       controller: 'CinemaUpdateController',
-    .when "/cinemas/:cinema_id/screens/new"
+    .when "/cinemas/:cinema_id/screens/new",
       templateUrl: "<%= asset_path("cinemas/screens/new.html") %>"
       controller: 'ScreenAddingController',
-    .when "/cinemas/:cinema_id/screens/:screen_id"
+    .when "/cinemas/:cinema_id/screens/:screen_id",
       templateUrl: "<%= asset_path("cinemas/screens/view.html") %>"
       controller: 'ScreenViewingController'
 @App.config [

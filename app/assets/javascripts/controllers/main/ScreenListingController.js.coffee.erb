@@ -28,5 +28,22 @@
                 return e.id != result.id;
             )
         )
+    $scope.openEditScreenDialog = (screen) ->
+        modalInstance = $modal.open(
+            templateUrl: '<%= asset_path("cinemas/screens/dialogs/screenDialog.html") %>',
+            controller: 'EditScreenDialogController'
+            resolve:
+                cinemaId: () ->
+                    $scope.cinemaId
+                screen: () ->
+                    screen
+        ).result.then((result) ->
+            if result is undefined then return false
+            for screen in $scope.screens
+                if screen.id == result.id
+                    screen.name = result.name
+                    screen.seats = result.seats
+
+        )
 
 ])
