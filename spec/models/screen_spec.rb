@@ -81,7 +81,7 @@ describe Screen do
       ShowType.should_receive(:find).and_return(FactoryGirl.build :show_type)
       Movie.should_receive(:find).and_return(FactoryGirl.build :movie)
 
-      screen.stub(:can_play_movie).with(false)
+      screen.stub(:can_play_movie).and_return(false)
       expect { screen.add_show(movie_id, show_type_id, datetime) }.to raise_error
     end
 
@@ -89,7 +89,7 @@ describe Screen do
       ShowType.should_receive(:find).and_return(FactoryGirl.build :show_type)
       Movie.should_receive(:find).and_return(FactoryGirl.build :movie)
 
-      screen.stub(:can_play_movie).with(true)
+      screen.stub(:can_play_movie).and_return(true)
       expect { screen.add_show(movie_id, show_type_id, datetime) }.not_to raise_error
     end
   end
