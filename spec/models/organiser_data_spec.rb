@@ -4,4 +4,6 @@ describe OrganiserData do
   let(:organiser_data) { FactoryGirl.create :organiser_datum }
 
   it { should have_many :users }
+  it { should have_many :cinemas}
+
 end

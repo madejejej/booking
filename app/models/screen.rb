@@ -6,7 +6,7 @@ class Screen < ActiveRecord::Base
   validates :name, presence: true
 
   scope :all_screens_for_cinema_with_seat_count, ->(cinema_id) do
-    Screen.all.includes(:seats).map { |s| {id: s.id, name: s.name, seats: s.seats.count} }
+    Screen.where(cinema_id: cinema_id).includes(:seats).map { |s| {id: s.id, name: s.name, seats: s.seats.count }}
   end
 
   scope :screen_with_seat_count, ->(screen_id) do
