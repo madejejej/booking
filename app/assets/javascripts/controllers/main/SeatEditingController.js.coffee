@@ -9,13 +9,11 @@
     rows: 1
 
   $scope.redraw = () ->
-    $scope.context.fillStyle = "black"
-    $scope.context.rect(0 ,0 ,$scope.canvas.width ,$scope.canvas.height)
-    $scope.context.fill()
     $scope.canvas.width = $('#seat-canvas-container').width()
     $scope.canvas.height = $('#seat-canvas-container').height()
+    $scope.context.fillStyle = "black"
     $scope.context.rect($scope.canvas.width/20, $scope.canvas.height/20, (18*$scope.canvas.width)/20, (18*$scope.canvas.height)/20)
-    $scope.context.stroke()
+    $scope.context.fill()
     drawScreen()
     drawRoom()
     drawOther()
@@ -28,14 +26,13 @@
     $scope.context.textAlign = "center"
     $scope.context.fillText("Screen", $scope.canvas.width/2, 2.5*$scope.canvas.height/20)
 
-  $scope.createSeats = () ->
+  $scope.reset = () ->
     $scope.newSeats = []
-    if $scope.seats.length == 0
-      for row in [1..$scope.layout.rows]
-        for col in [1..$scope.layout.columns]
-          $scope.newSeats.push
-            y: row,
-            x: col
+    for row in [1..$scope.layout.rows]
+      for col in [1..$scope.layout.columns]
+        $scope.newSeats.push
+          y: row,
+          x: col
     $scope.redraw();
 
   drawRoom = () ->
@@ -110,6 +107,6 @@
 
 
   angular.element($window).bind 'resize', $scope.redraw
-  $scope.createSeats();
+  $scope.reset();
   $scope.redraw();
 ])
