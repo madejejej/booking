@@ -8,7 +8,6 @@
     columns: 1,
     rows: 1
 
-
   $scope.redraw = () ->
     $scope.context.fillStyle = "black"
     $scope.context.rect(0 ,0 ,$scope.canvas.width ,$scope.canvas.height)
@@ -62,8 +61,8 @@
     return rect
 
   screenCoordToRoom = (coord) ->
-    for row in [1..$scope.layout.rows]
-      for col in [1..$scope.layout.columns]
+    for row in [1..$scope.layout.rows] by 1
+      for col in [1..$scope.layout.columns] by 1
         rect = roomCoordToScreen({x: col, y: row})
         if(coord.x >= rect.x && coord.x < rect.x+rect.width && coord.y >= rect.y && coord.y < rect.y+rect.height)
           return {x: col, y: row}
@@ -78,14 +77,17 @@
   $scope.select = (event) ->
     x = event.offsetX
     y = event.offsetY
-    coord = screenCoordToRoom({x: x, y: y})
-    find = (i for i in $scope.newSeats when i.x == coord.x and i.y == coord.y)
-    if find is undefined or find is null or find.length == 0
-      $scope.newSeats.push(coord)
+    $scope.coord = screenCoordToRoom({x: x, y: y})
+    find = null
+    for i in [1..$scope.newSeats.length] by 1
+      if($scope.newSeats[i-1].x == $scope.coord.x && $scope.newSeats[i-1].y == $scope.coord.y)
+        find = $scope.newSeats[i-1]
+    if find is null
+      $scope.newSeats.push($scope.coord)
     else
       $scope.newSeats = $scope.newSeats.filter(
         (seat) ->
-          !(seat.x==coord.x && seat.y==coord.y)
+          !(seat.x==$scope.coord.x && seat.y==$scope.coord.y)
       )
     $scope.redraw();
 

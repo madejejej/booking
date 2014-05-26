@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427092231) do
+ActiveRecord::Schema.define(version: 20140526165000) do
 
   create_table "cinemas", force: true do |t|
     t.string   "name"
@@ -53,12 +53,16 @@ ActiveRecord::Schema.define(version: 20140427092231) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "cinema_id"
+    t.integer  "width"
+    t.integer  "height"
   end
 
   create_table "seats", force: true do |t|
     t.integer  "screen_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "x"
+    t.integer  "y"
   end
 
   create_table "show_types", force: true do |t|
