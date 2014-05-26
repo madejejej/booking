@@ -4,8 +4,9 @@
         $scope.header= "Add screen"
         $scope.button_text = "Create"
         $scope.screen =
-            id: -1
+            id: -1,
             name: '',
+            seats: 0
         $scope.areButtonsDisabled = false;
         $scope.errorOccurred = false;
 

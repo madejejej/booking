@@ -97,7 +97,6 @@
     return
   $scope.createSeatLayout = () ->
     success = (success) ->
-
       $location.path( "/cinemas/#{$routeParams.cinema_id}/screens")
     failure = (failure) ->
     SeatService.createSeats(
