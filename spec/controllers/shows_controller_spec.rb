@@ -29,8 +29,8 @@ describe ShowsController do
   describe '#create' do
     context 'with no existing screen' do
       before do
-        Screen.should_receive(:find).and_return(nil)
-        post :create, {screen_id: 1, movie_id: 1, datetime: DateTime.now, show_type_id: 1}, format: :json
+        Screen.should_receive(:find).and_raise(ActiveRecord::RecordNotFound)
+        post :create, movie_id: 1, show: { show_id: 1, datetime: DateTime.now, show_type_id: 1 }, format: :json
 
       end
       specify { response.status.should eq 422 }
@@ -39,8 +39,8 @@ describe ShowsController do
     context 'with no existing show type' do
       before do
         Screen.should_receive(:find).and_return(FactoryGirl.build :screen)
-        ShowType.should_receive(:find).and_return(nil)
-        post :create, {screen_id: 1, movie_id: 1, datetime: DateTime.now, show_type_id: 1}, format: :json
+        ShowType.should_receive(:find).and_raise(ActiveRecord::RecordNotFound)
+        post :create, movie_id: 1, show: { show_id: 1, datetime: DateTime.now, show_type_id: 1 }, format: :json
       end
 
       specify { response.status.should eq 422}
