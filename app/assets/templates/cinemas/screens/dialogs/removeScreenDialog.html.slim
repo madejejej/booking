@@ -1,9 +1,11 @@
 div.modal-header
+  div ng-show='errorOccurred' style='color: red'
+    | An error has occurred. Please try again later.
   | Remove screen
 div.modal-body
 
   | Are you sure you want to delete screen {{screen.name}}?
 
 div.modal-footer
-  button.btn-default.btn type='submit' ng-click='cancel()' Cancel
-  button.btn-success.btn type='submit' ng-click='submit()' Yes
+  button.btn-default.btn type='submit' ng-click='cancel()' ng-disabled='areButtonsDisabled && !errorOccurred' Cancel
+  button.btn-success.btn type='submit' ng-click='submit()' ng-disabled='areButtonsDisabled' Yes

@@ -1,5 +1,6 @@
 class CinemasController < ApplicationController
   respond_to :json
+  before_action :require_organiser_authentication!, except: :show
 
   def index
     @cinemas = current_user.organiser_data.cinemas
