@@ -9,11 +9,15 @@ class SeatsController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @screen = Screen.find(params[:screen_id])
+      @screen.width = params[:layout]['width']
+      @screen.height = params[:layout]['height']
+      @screen.save
       JSON.parse(params[:seats]).each do |item|
         seat = Seat.new
         seat.screen = @screen
         seat.x = item['x']
         seat.y = item['y']
+        seat.save
       end
     end
     @cinema = @screen.cinema
