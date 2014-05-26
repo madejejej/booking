@@ -12,7 +12,6 @@ class ScreensController < ApplicationController
     @screen.save
     @cinema = @screen.cinema
     respond_with @cinema, @screen
-
   end
 
   def destroy
