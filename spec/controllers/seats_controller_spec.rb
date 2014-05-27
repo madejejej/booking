@@ -6,8 +6,8 @@ describe SeatsController do
       let!(:cinema) { FactoryGirl.create :cinema }
       let!(:screen) { FactoryGirl.create :screen, cinema_id: cinema.id }
       let!(:user) { setup_organiser_sign_in }
-      let!(:seats) { '[ {"x": 1, "y": 1}, {"x": 1, "y": 2} ]' }
-      let(:layout) { '{ "width": 2, "height": 1 }' }
+      let!(:seats) { [ {x: 1, y: 1}, {x: 1, y: 2} ] }
+      let(:layout) { { columns: 2, rows: 1 } }
       before do
         post :create, cinema_id: cinema.id, screen_id: screen.id, seats: seats, layout: layout, format: :json
       end
