@@ -1,7 +1,7 @@
 .main
   .clearfix.positioner
     .film-cover
-      img.img-thumbnail ng-src='../{{movie.cover_url}}'
+      img.img-thumbnail ng-src='{{movie.cover.small.url}}'
     .movie-details
         h4
          | {{movie.title}}
