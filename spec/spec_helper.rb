@@ -14,6 +14,7 @@ def setup_organiser_sign_in
   data = FactoryGirl.create :organiser_data
   user = FactoryGirl.create :user, organiser_data: data
   sign_in user
+  user
 end
 
 # end of helper methods

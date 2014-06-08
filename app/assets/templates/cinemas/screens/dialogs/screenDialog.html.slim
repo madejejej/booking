@@ -10,13 +10,6 @@ div.modal-body
     span ng-show='!screen.name' class="text-danger"
       |  * Screen name cannot be empty
 
-  div.form-group
-  label for="seatCount"
-    | Number of seats
-  input.form-control id="seatCount" type='number' ng-model='screen.seats' min='0'
-  span ng-show='!screen.numberOfSeats' class="text-danger"
-    |  * A positive amount of seats is required!
-
 div.modal-footer
   button.btn-default.btn type='submit' ng-click='cancel()' ng-disabled='areButtonsDisabled && !errorOccurred'Cancel
   button.btn-success.btn type='submit' ng-click='action()' ng-disabled='!validScreenForm() || areButtonsDisabled' {{button_text}}

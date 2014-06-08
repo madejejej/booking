@@ -8,7 +8,7 @@
 
 @App = angular.module('App', ['App.services','App.controllers','ngRoute'])
 
-@App.config ($routeProvider, $locationProvider) ->
+@App.config ($httpProvider, $routeProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)
   $routeProvider
     .when "/",
@@ -20,7 +20,7 @@
       templateUrl: "<%= asset_path("register.html") %>"
       controller: 'LoginController'
     .when "/movies",
-      templateUrl: "<%= asset_path("movies/index.html") %>"
+      templateUrl: "<%= asset_path("movies/index.html.slim") %>"
       controller: 'MoviesListingController'
     .when "/movies/:movie_id/shows",
       templateUrl: "<%= asset_path("movies/shows.html") %>"
@@ -29,7 +29,7 @@
       templateUrl: "<%= asset_path("movies/show.html") %>"
       controller: 'MovieController'
     .when "/cinemas/:cinema_id/screens",
-      templateUrl: "<%= asset_path("cinemas/screens/index.html") %>"
+      templateUrl: "<%= asset_path("cinemas/screens/index.html.slim") %>"
       controller: 'ScreenListingController'
     .when "/cinemas",
       templateUrl: "<%= asset_path("cinemas/list.html") %>"
@@ -42,8 +42,13 @@
       controller: 'CinemaShowController'
     .when "/cinemas/update/:cinema_id",
       templateUrl: "<%= asset_path("cinemas/update.html") %>"
-      controller: 'CinemaUpdateController'
-
+      controller: 'CinemaUpdateController',
+    .when "/cinemas/:cinema_id/screens/new",
+      templateUrl: "<%= asset_path("cinemas/screens/new.html") %>"
+      controller: 'ScreenAddingController',
+    .when "/cinemas/:cinema_id/screens/:screen_id",
+      templateUrl: "<%= asset_path("cinemas/screens/view.html") %>"
+      controller: 'ScreenViewingController'
 @App.config [
     "$httpProvider"
     ($httpProvider) ->
