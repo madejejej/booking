@@ -8,8 +8,12 @@ class CinemasController < ApplicationController
   end
 
   def show
-    @cinema = Cinema.find_by(id: params[:id])
-    respond_with @cinema
+    begin
+      @cinema = Cinema.find(params[:id])
+      respond_with @cinema
+    rescue Exception => e
+      render json: {message: e.message}, status: :not_found
+    end
   end
 
   def create

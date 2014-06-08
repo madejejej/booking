@@ -3,7 +3,11 @@
 ($scope, $location, $routeParams, $modal, ScreenService) ->
 
     $scope.cinemaId = $routeParams.cinema_id
-    $scope.screens = ScreenService.getCinemaScreens($scope.cinemaId)
+    CinemaService.getCinema($routeParams.cinema_id, (success) ->
+        $scope.cinema = success
+        $scope.screens = ScreenService.getCinemaScreens($routeParams.cinema_id)
+    ,(error) ->
+    )
 
     $scope.addScreen = () ->
         url = "#{$location.path()}/new"

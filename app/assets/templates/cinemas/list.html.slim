@@ -7,6 +7,7 @@ table.table.table-hover
       th Phone
       th
       th
+      th
   tbody
     tr ng-repeat="cinema in cinemas"
       th ng-click="view(cinema)"
@@ -15,8 +16,9 @@ table.table.table-hover
         | {{cinema.location}}
       th ng-click="view(cinema)"
         | {{cinema.phone}}
-
       th
         a.btn.btn-default.btn-sm.active role="button" ng-href="/cinemas/update/{{cinema.id}}"  Update
       th
         button.btn.btn-default.btn-sm type="button" ng-click="deleteCinema(cinema)"  Delete
+      th
+        a.btn.btn-default.btn-sm type="button" ng-href="/cinemas/{{cinema.id}}"  Details
