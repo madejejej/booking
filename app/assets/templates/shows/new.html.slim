@@ -3,12 +3,12 @@
 form role="form"
     .form-group
         label for="movie" movie
-        select.form-control ng-model="selected.movie" ng-options="movie.title for movie in serverData.movies"
+        select.form-control ng-model="selected.movie" ng-options="movie.title for movie in serverData.movies" ng-required="true"
     .form-group
         label for="cinema"  Cinema
-        select.form-control ng-model="selected.cinema" ng-options="cinema.name+' '+cinema.location for cinema in serverData.cinemas" ng-required="true"
+        select.form-control ng-model="selected.cinema" ng-options="cinema.name+' '+cinema.location for cinema in serverData.cinemas" ng-required="true" ng-change="getScreens(selected.cinema)"
     .form-group
         label for="screen" Screen
-        input#phone.form-control placeholder=("Enter phone number") type="phone" ng-model="cinema.phone" ng-required="true"
+        select.form-control ng-model="selected.screen" ng-options="screen.name for screen in serverData.screens" ng-required="true"
 
     button.btn.btn-default type="submit" ng-click='createCinema()' ng-disabled='!validCinemaForm()'  Submit
