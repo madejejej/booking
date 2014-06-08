@@ -27,5 +27,8 @@ class Show < ActiveRecord::Base
     screen.seats.count
   end
 
+  def end_date
+    date+movie.duration.minutes
+  end
 
 end
