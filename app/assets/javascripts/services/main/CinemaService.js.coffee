@@ -23,11 +23,15 @@
       window.location = "/cinemas/"
     )
 
-  factory.getCinema = (cinemaId) ->
+  factory.getCinema = (cinemaId, successFunction, errorFunction) ->
     return $resource("/api/cinemas/#{cinemaId}", {},
       query:
         method: "GET"
-    ).query()
+    ).query((success) ->
+      successFunction(success) unless  undefined is successFunction
+    ,(error) ->
+      errorFunction(error) unless  undefined is errorFunction
+    )
 
   factory.deleteCinema = (cinemaId) ->
     $resource("/api/cinemas/#{cinemaId}", {},

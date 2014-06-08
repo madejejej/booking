@@ -1,4 +1,3 @@
-input type="text" class="form-control" ng-model="movieSearch" placeholder="Search for movie by anything!"
 table.table.table-hover
   thead
     tr
@@ -7,8 +6,10 @@ table.table.table-hover
       th Description
       th Duration
       th Shows in
+      th Movie details
+      th Available shows
   tbody
-    tr ng-repeat="movie in movies | filter:movieSearch" ng-click="viewShows(movie)"
+    tr ng-repeat="movie in movies | filter:movieSearch"
       th
         img ng-src='{{movie.cover_url}}' width="50" height="50"
       th
@@ -20,4 +21,7 @@ table.table.table-hover
       th
         div ng-repeat="cinema in movie.cinemas"
           | {{cinema.name}} {{cinema.location}}
-
+      th
+        a ng-click="showDetails(movie)" Details
+      th
+        a ng-click="viewShows(movie)" Shows

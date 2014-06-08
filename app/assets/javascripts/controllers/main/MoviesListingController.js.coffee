@@ -3,4 +3,8 @@
   $scope.movies = MovieService.query()
   $scope.viewShows = (movie) ->
     $location.path("/movies/#{movie.id}/shows")
+
+  $scope.showDetails = (movie) ->
+    $location.path("/movies/#{movie.id}")
+
 ])
