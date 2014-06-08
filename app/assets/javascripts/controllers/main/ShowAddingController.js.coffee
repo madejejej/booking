@@ -1,4 +1,4 @@
-@controllers.controller( 'ShowAddingController',['$scope','$location','$routeParams', 'ShowService', 'MovieService',  ($scope, $location,$routeParams,ShowService, MovieService) ->
+@controllers.controller( 'ShowAddingController',['$scope','$location','$routeParams', 'ShowService', 'MovieService', 'CinemaService',  ($scope, $location,$routeParams,ShowService, MovieService,CinemaService) ->
 #  console.log($routeParams.movie_id);
 
   $scope.movieId = parseInt($routeParams.movie_id)
@@ -21,5 +21,10 @@
     )
   )
 
+  CinemaService.list ((successResult) ->
+    $scope.serverData.cinemas = successResult
+    $scope.selected.cinema = $scope.serverData.cinemas[0]
+  ), (errorResult) ->
+    console.log(errorResult);
 
 ])
