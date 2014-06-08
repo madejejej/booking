@@ -1,4 +1,6 @@
-@controllers.controller( 'ScreenListingController',['$scope', '$routeParams', '$modal', 'ScreenService', 'CinemaService',  ($scope, $routeParams, $modal, ScreenService, CinemaService) ->
+@controllers.controller( 'ScreenListingController',
+['$scope','$location', '$routeParams', '$modal', 'ScreenService',
+($scope, $location, $routeParams, $modal, ScreenService) ->
 
     $scope.cinemaId = $routeParams.cinema_id
     CinemaService.getCinema($routeParams.cinema_id, (success) ->
@@ -7,17 +9,13 @@
     ,(error) ->
     )
 
-    $scope.openAddScreenDialog = () ->
-        modalInstance = $modal.open(
-            templateUrl: '<%= asset_path("cinemas/screens/dialogs/screenDialog.html") %>',
-            controller: 'AddScreenDialogController'
-            resolve:
-                cinemaId: () ->
-                    $scope.cinemaId
-        ).result.then((result) ->
-            if result is undefined then return false
-            $scope.screens.push(result)
-        )
+    $scope.addScreen = () ->
+        url = "#{$location.path()}/new"
+        $location.path(url)
+
+    $scope.viewScreen = (screen) ->
+        url = "#{$location.path()}/#{screen.id}"
+        $location.path(url)
 
     $scope.openRemoveScreenDialog = (screen) ->
         modalInstance = $modal.open(
@@ -34,8 +32,6 @@
                 return e.id != result.id;
             )
         )
-
-
     $scope.openEditScreenDialog = (screen) ->
         modalInstance = $modal.open(
             templateUrl: '<%= asset_path("cinemas/screens/dialogs/screenDialog.html") %>',
@@ -53,7 +49,5 @@
                     screen.seats = result.seats
 
         )
-
-
 
 ])
