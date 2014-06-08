@@ -7,4 +7,8 @@
   $scope.showDetails = (movie) ->
     $location.path("/movies/#{movie.id}")
 
+  $scope.addNewShow = (movie) ->
+    $location.path("movies/#{movie.id}/shows/new")
+
+
 ])
