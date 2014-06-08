@@ -14,6 +14,7 @@ Booking::Application.routes.draw do
     end
 
     resources :cinemas do
+      resources :show_type
       resources :screens do
         resources :seats
       end
