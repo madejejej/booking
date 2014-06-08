@@ -1,5 +1,5 @@
 @controllers.controller('ReservationDialogController',
-  [ '$scope','$modalInstance', 'movieId', 'showId', 'ShowService', 'TicketTypeService', ($scope, $modalInstance, movieId, showId, ShowService, TicketTypeService) ->
+  [ '$scope','$modalInstance', 'movieId', 'showId', 'ReservationService', 'TicketTypeService', ($scope, $modalInstance, movieId, showId, ReservationService, TicketTypeService) ->
 
     $scope.reservation =
       booker: '',
@@ -25,7 +25,7 @@
       angular.forEach($scope.tickets, (ticket) ->
         reservation.tickets[ticket.id] = numberValueOrZero(ticket.count)
       )
-      ShowService.CRUD(movieId,showId).create
+      ReservationService.CRUD(movieId,showId).create
         movieId: movieId
         showId: showId
         reservation

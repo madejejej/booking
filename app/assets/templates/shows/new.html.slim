@@ -10,5 +10,8 @@ form role="form"
     .form-group
         label for="screen" Screen
         select.form-control ng-model="selected.screen" ng-options="screen.name for screen in serverData.screens" ng-required="true"
-
-    button.btn.btn-default type="submit" ng-click='createCinema()' ng-disabled='!validCinemaForm()'  Submit
+    .form-group
+        label for="date" Date:
+        input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="selected.date.day" is-open="opened" min-date="minDate()"
+        timepicker ng-model="selected.date.time" hour-step="1" minute-step="15" show-meridian="false"
+    button.btn.btn-default type="submit" ng-click='createShow()' ng-disabled='!validShowForm()'  Submit
