@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :movie do
     title "MyString"
     description "MyText"
-    cover_url "MyString"
     duration 120
+    cover "cover.jpg"
   end
 end

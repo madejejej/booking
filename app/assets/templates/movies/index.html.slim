@@ -11,7 +11,7 @@ table.table.table-hover
   tbody
     tr ng-repeat="movie in movies | filter:movieSearch"
       th
-        img ng-src='{{movie.cover_url}}' width="50" height="50"
+        img ng-src='{{movie.cover.thumb.url}}' width="50" height="50"
       th
         | {{movie.title}}
       th
