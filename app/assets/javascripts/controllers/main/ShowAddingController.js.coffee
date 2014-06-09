@@ -10,9 +10,7 @@
     movie: null
     cinema: null
     screen: null
-    date:
-      day: new Date()
-      time: new Date()
+    date: new Date()
     showType: null;
 
 
@@ -46,20 +44,21 @@
     ShowTypeService.query
       cinema_id: cinema.id
     , ((successResult) ->
-      console.log successResult
       $scope.serverData.showTypes = successResult
     ), (error) ->
       console.log error
 
 
   $scope.createShow = () ->
-    console.log($scope.selected)
-
     show =
       movie_id: $scope.selected.movie.id
       screen_id: $scope.selected.screen.id
       show_type_id: $scope.selected.showType.id
-      datetime: new Date(); # TODO
+      datetime: $scope.selected.date.set(
+        second: 0
+        millisecond: 0
+      )
+    show.datetime.addMinutes(-show.datetime.getTimezoneOffset())
 
     ShowService.CRUD(show.movie_id).create
       movieId: show.movie_id
