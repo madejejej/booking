@@ -1,0 +1,22 @@
+alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"
+  | {{alert.message}}
+.h3
+    | Creating new show for movie: {{selectedMovie.title}}
+form role="form"
+    .form-group
+        label for="movie" Movie:
+        select.form-control ng-model="selected.movie" ng-options="movie.title for movie in serverData.movies" ng-required="true"
+    .form-group
+        label for="cinema"  Cinema:
+        select.form-control ng-model="selected.cinema" ng-options="cinema.name+' '+cinema.location for cinema in serverData.cinemas" ng-required="true" ng-change="cinemaChanged(selected.cinema)"
+    .form-group collapse="collapseScreenAndShowType()"
+        label for="screen" Screen:
+        select.form-control ng-model="selected.screen" ng-options="screen.name for screen in serverData.screens" ng-required="true"
+    .form-group collapse="collapseScreenAndShowType()"
+        label for="screen" Show type:
+        select.form-control ng-model="selected.showType" ng-options="showType.name for showType in serverData.showTypes" ng-required="true"
+    .form-group
+        label for="date" Date:
+        input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="selected.date" is-open="opened" min-date="minDate()"
+        timepicker ng-model="selected.date" hour-step="1" minute-step="15" show-meridian="false"
+    button.btn.btn-default type="submit" ng-click='createShow()' ng-disabled='!validShowForm()'  Submit
