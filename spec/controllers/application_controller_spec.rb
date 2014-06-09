@@ -13,7 +13,7 @@ describe ApplicationController do
     context "user not authenticated" do
       it "redirects" do
         get :index
-        response.should be_redirect
+        response.status.should eq (401)
       end
     end
 
@@ -23,7 +23,7 @@ describe ApplicationController do
       it "redirects" do
         sign_in user
         get :index
-        response.should be_redirect
+        response.status.should eq (401)
       end
     end
 

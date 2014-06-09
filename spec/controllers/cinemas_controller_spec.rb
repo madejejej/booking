@@ -5,7 +5,7 @@ shared_examples "not authorized user" do |verb, action, params={}|
     before { send(verb, action, params.merge({format: :json})) }
 
     it "redirects to rootpath" do
-      response.should redirect_to root_path
+      response.status.should eq (401)
     end
 
   end
@@ -18,7 +18,7 @@ shared_examples "not authorized user" do |verb, action, params={}|
     end
 
     it "redirects to rootpath" do
-      response.should redirect_to root_path
+      response.status.should eq (401)
     end
 
   end
