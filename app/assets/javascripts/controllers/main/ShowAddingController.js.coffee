@@ -1,5 +1,4 @@
 @controllers.controller( 'ShowAddingController',['$scope','$location','$routeParams', 'ShowService', 'MovieService', 'CinemaService','ScreenService','ShowTypeService',  ($scope, $location,$routeParams,ShowService, MovieService,CinemaService, ScreenService, ShowTypeService) ->
-#  console.log($routeParams.movie_id);
 
   $scope.movieId = parseInt($routeParams.movie_id)
 
@@ -54,11 +53,11 @@
       movie_id: $scope.selected.movie.id
       screen_id: $scope.selected.screen.id
       show_type_id: $scope.selected.showType.id
+      cinema_id: $scope.selected.cinema.id
       datetime: $scope.selected.date.set(
         second: 0
         millisecond: 0
       )
-    show.datetime.addMinutes(-show.datetime.getTimezoneOffset())
 
     ShowService.CRUD(show.movie_id).create
       movieId: show.movie_id

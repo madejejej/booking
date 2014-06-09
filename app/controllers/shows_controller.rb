@@ -12,11 +12,11 @@ class ShowsController < ApplicationController
 
       show_type = ShowType.find(show_params[:show_type_id])
 
-      cinema = current_user.organiser_data.cinemas.select { |c| c.screens.contains(screen) }.first
+      cinema = Cinema.find(show_params[:cinema_id])
       raise 'Cannot add a show to not your cinema you bastard!' if cinema.nil?
-      raise 'This cinema does not have such show type available!' unless cinema.show_types.contains(show_type)
+      raise 'This cinema does not have such show type available!' unless show_type.cinema == cinema
 
-      screen.add_show(show_params[:movie_id], show_params[:show_type_id], show_params[:datetime])
+      screen.add_show(show_params[:movie_id], show_params[:show_type_id], show_params[:datetime].to_time)
     rescue Exception => error
       return render json: {message: error.message}, status: :unprocessable_entity
     end
@@ -25,7 +25,7 @@ class ShowsController < ApplicationController
 
   private
   def show_params
-    params.require(:show).permit(:movie_id, :screen_id, :datetime, :show_type_id)
+    params.require(:show).permit(:movie_id, :screen_id, :cinema_id, :datetime, :show_type_id)
   end
 
 
