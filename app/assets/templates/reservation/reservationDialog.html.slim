@@ -1,20 +1,24 @@
-div
+div.modal-header
+  | Reservation
   alert type="alert.type" close="closeAlert()" ng-show="showAlert()"
     | {{alert.message}}
-  p Reservation name:
-  input type='text' ng-model='reservation.booker' ng-required='true'
-  span ng-show='!reservation.booker' class="text-danger"
-    |  * Reservation name cannot be empty
-
-  p Number of seats:
-  div ng-repeat='ticket in tickets'
-    span
-      |{{ticket.name}} ( cena : {{ticket.price_in_eurocents}} zł)
-    input type='number' ng-model='ticket.count' min='0'
-  span ng-show='notPositiveNumberOfTickets()' class="text-danger"
-      |  * Reservation seats must be positive value!
-  div
-    span
+div.modal-body
+    div.form-group
+      label for="reservationName"
+        | Reservation name:
+      input type='text' id='reservationName' ng-model='reservation.booker' ng-required='true'
+      div ng-show='!reservation.booker' class="text-danger"
+        |  * Reservation name cannot be empty
+    div.form-group
+      label for="seatCount"
+        | Number of seats:
+      div ng-repeat='ticket in tickets'
+        span
+          |{{ticket.name}} ( cena : {{ticket.price_in_eurocents}} zł):
+        input type='number' ng-model='ticket.count' min='0'
+      div ng-show='notPositiveNumberOfTickets()' class="text-danger"
+        |  * Reservation seats must be positive value!
+    div
       | Total price: {{totalPrice()}} zł
-  div
-    button type='submit' ng-click='makeReservation()' ng-disabled='!validReservationForm()' Create reservation
+div.modal-footer
+  button.btn-default.btn type='submit' ng-click='chooseSeats()' ng-disabled='!validReservationForm()' Choose seats

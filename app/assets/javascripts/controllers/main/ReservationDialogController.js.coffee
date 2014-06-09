@@ -18,21 +18,23 @@
       if $scope.reservation.booker is undefined then return false
       return $scope.reservation.booker.length > 0 && !$scope.notPositiveNumberOfTickets()
 
-    $scope.makeReservation = () ->
+    $scope.chooseSeats = () ->
       reservation = $scope.reservation
       reservation.tickets = {}
 
       angular.forEach($scope.tickets, (ticket) ->
         reservation.tickets[ticket.id] = numberValueOrZero(ticket.count)
       )
-      ShowService.CRUD(movieId,showId).create
+      $modalInstance.close({reservationData: reservation, type: 'success'})
+
+      ###ShowService.CRUD(movieId,showId).create
         movieId: movieId
         showId: showId
         reservation
         (success) ->
           $modalInstance.close({message:success.message, type: 'success'})
         (error) ->
-          $scope.alert = ({message: error.data.message, type: 'danger'})
+          $scope.alert = ({message: error.data.message, type: 'danger'})###
 
     $scope.notPositiveNumberOfTickets = () ->
       allTicketsCount = 0

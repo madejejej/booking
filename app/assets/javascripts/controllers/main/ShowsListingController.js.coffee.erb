@@ -17,7 +17,19 @@
                         movieId: () ->
                             $scope.movieId
                 modalInstance.result.then( (result) ->
-                    $scope.alerts.push({msg: result.message, type: result.type})
+                    if result.message?
+                        $scope.alerts.push({msg: result.message, type: result.type})
+                        return
+                    else if result.reservationData?
+                        #result.reservationData.screenId
+                        modalInstance = $modal.open
+                            templateUrl: '<%= asset_path("reservation/seatChoosingDialog.html") %>',
+                            controller: 'ReservationSeatChoosingController'
+                            resolve:
+                                reservationData: () ->
+                                    result.reservationData
+
+
                 )
 
             $scope.closeAlert = (index) ->
