@@ -30,6 +30,7 @@ group :development, :test do
   gem 'cucumber-rails', require: false
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'rails_karma'
 end
 
 group :test do
