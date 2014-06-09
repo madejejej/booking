@@ -73,4 +73,8 @@
     $scope.selected.cinema != null && $scope.selected.showType!= null && $scope.selected.movie != null && $scope.selected.screen != null && $scope.selected.date.day != null && $scope.selected.date.time != null
 
 
+  $scope.collapseScreenAndShowType = () ->
+    $scope.selected.cinema == null
+
+
 ])
