@@ -1,0 +1,17 @@
+.h1
+    | Create new movie
+form role="form"
+    .form-group
+        label for="title" Title
+        input#title.form-control placeholder=("Enter title") type="text" ng-model="movie.title" ng-required="true"
+    .form-group
+        label for="director"  Director
+        input#director.form-control placeholder=("Enter director") type="text" ng-model="movie.director" ng-required="true"
+    .form-group
+        label for="duration" Duration
+        input#duration.form-control placeholder=("Enter duration") type="text" ng-model="movie.duration" ng-required="true"
+    .form-group
+        label for="description" Description
+        textarea#description.form-control placeholder=("Enter description") rows="5" type="text" ng-model="movie.description" ng-required="true"
+
+    button.btn.btn-default type="submit" ng-click='createMovie()' ng-disabled='!validMovieForm()'  Submit

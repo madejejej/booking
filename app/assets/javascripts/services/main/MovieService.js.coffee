@@ -20,5 +20,21 @@
         return
       )
     movies
+
+  factory.create = (movie) ->
+    return $resource("/api/movies/", {},
+      query:
+        method: "POST"
+        params:
+          title: movie.title
+          description: movie.description
+          director: movie.director
+    ).query(
+      (successResult) ->
+        movie = successResult
+        window.location = "/movies/#{movie.id}"
+        $scope.apply()
+    )
+
   factory
 )
