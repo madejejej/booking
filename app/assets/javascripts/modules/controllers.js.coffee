@@ -2,6 +2,7 @@
   [
     'App.services',
     'ngResource',
+    'ui.calendar',
     'ui.bootstrap'
   ])
 
