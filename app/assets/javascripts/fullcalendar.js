@@ -1489,7 +1489,6 @@ function EventManager(options) { // assumed to be a calendar
 
 
 	function updateEvent(event) {
-
 		event.start = t.moment(event.start);
 		if (event.end) {
 			event.end = t.moment(event.end);
@@ -1958,6 +1957,9 @@ var dayIDs = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 // diffs the two moments into a Duration where full-days are recorded first,
 // then the remaining time.
 function dayishDiff(d1, d0) {
+    if  (d1 == null ||  d0 == null ) {
+        return undefined;
+    }
 	return moment.duration({
 		days: d1.clone().stripTime().diff(d0.clone().stripTime(), 'days'),
 		ms: d1.time() - d0.time()
