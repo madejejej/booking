@@ -1,4 +1,5 @@
 //= require moment
+//= require jquery-ui-1.10.4.min
 /*!
  * FullCalendar v2.0.0
  * Docs & License: http://arshaw.com/fullcalendar/

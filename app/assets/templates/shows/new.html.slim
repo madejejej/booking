@@ -21,7 +21,7 @@ form role="form"
           button class="btn btn-success" ng-click="changeView('agendaDay', showsCalendar)" AgendaDay
           button class="btn btn-success" ng-click="changeView('agendaWeek', showsCalendar)" AgendaWeek
           button class="btn btn-success" ng-click="changeView('month', showsCalendar)" Month
-          div ui-calendar="uiConfig.calendar" calendar="showsCalendar" class="span8 calendar" ng-model="eventSources"
+          div ui-calendar="uiConfig.calendar" calendar="showsCalendar" class="span8 calendar" ng-model="eventSources" config="uiConfig.calendar"
         .col-md-4
           label for="date" Date:
           input type="text"  datepicker-popup="dd-MM-yyyy" ng-model="selected.date" is-open="opened" min-date="minDate()"
@@ -30,3 +30,4 @@ form role="form"
 
 
     button.btn.btn-default type="submit" ng-click='createShow()' ng-disabled='!validShowForm()'  Submit
+    button type="button" ng-click="remove(showsCalendar)" REMOVE

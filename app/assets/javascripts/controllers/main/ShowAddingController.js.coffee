@@ -123,20 +123,17 @@
       title: "All Day Event"
       start: new Date(y, m, d,12,0)
       end: new Date(y, m, d,14,0)
+      editable: false
     }
     {
       title: "Long Event"
       start: new Date(y, m, d ,11,0)
       end: new Date(y, m, d, 13,0)
       className: 'gcal-event'
+      editable: false
     }
   ]
 
-  # alert on eventClick
-  $scope.alertOnEventClick = (event, allDay, jsEvent, view) ->
-    $scope.alertMessage = (event.title + " was clicked ")
-    console.log(event.title);
-    return
 
 
 
@@ -146,6 +143,12 @@
     console.log($scope.events)
     calendar.fullCalendar( 'refetchEvents' )
     calendar.fullCalendar( 'rerenderEvents' )
+    console.log(calendar.fullCalendar('getView').start);
+    console.log(calendar.fullCalendar('getView').end);
+    $scope.$watch (->
+      $scope.showsCalendar.fullCalendar('getView').start
+    ), ->
+      console.log($scope.showsCalendar.fullCalendar('getView').start);
     return
 #
 
@@ -161,18 +164,52 @@
     return
 
 
-  # config object
-  $scope.uiConfig = calendar:
-    height: 450
-    editable: true
-    header:
-      left: "title"
-      center: ""
-      right: "today prev,next"
+  # alert on eventClick
+  $scope.eventClicked = (event, jsEvent, view) ->
+    console.log(event.title + ' clicked');
+    return
 
-    eventClick: $scope.alertOnEventClick
+
+  $scope.viewRendered = () ->
+    console.log('View rendered');
+    # TODO refresh shows from backend by dates
+    return
+
+
+  $scope.updateNewShowDateRange = (newStart) ->
+    $scope.selected.date = newStart # will fire watch which changes newShow date
+
+
+  $scope.drop = (event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view) ->
+    console.log('DROPPPED');
+    newStart = event._start._d.clone()
+    newStart.set
+      hour: event._start._i.getHours()
+      minute: event._start._i.getMinutes()
+      second: event._start._i.getSeconds()
+    $scope.updateNewShowDateRange(newStart)
+    return
+    
+  # config object
+  $scope.uiConfig =
+    calendar:
+      height: 450
+      editable: true
+      eventClick: $scope.eventClicked
+      viewRender: $scope.viewRendered
+      eventDrop: $scope.drop
 
 
   $scope.eventSources = [$scope.newShow,$scope.events];
+
+#  calendarDateRangeListener = () ->
+#    $scope.showsCalendar.fullCalendar viewRender: (view, element) ->
+#        console.log(view);
+
+
+
+
+
+
 
 ])
