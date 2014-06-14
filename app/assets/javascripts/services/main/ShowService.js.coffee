@@ -23,10 +23,6 @@
 
   factory.getByScreenAndDateRange = (screen_id, dateStart, dateEnd) ->
     # TODO return shows from service
-    console.log('GOT iT');
-    console.log(screen_id);
-    console.log(dateStart);
-    console.log(dateEnd);
     movies = [
       {
         title: "Matrix"

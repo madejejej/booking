@@ -142,12 +142,10 @@
 
   # alert on eventClick
   $scope.eventClicked = (event, jsEvent, view) ->
-    console.log(event.title + ' clicked');
     return
 
 
   $scope.viewRendered = () ->
-    console.log('View rendered');
     calendar = $scope.showsCalendar
     if $scope.selected.screen != null
       updateCalendarEvents($scope.selected.screen, calendar.fullCalendar('getView').start._d, calendar.fullCalendar('getView').end._d)
@@ -159,7 +157,6 @@
 
 
   $scope.drop = (event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view) ->
-    console.log('DROPPPED');
     newStart = event._start._d.clone()
     newStart.set
       hour: event._start._i.getHours()
