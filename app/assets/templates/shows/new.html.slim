@@ -11,7 +11,7 @@ form role="form"
       select.form-control ng-model="selected.cinema" ng-options="cinema.name+' '+cinema.location for cinema in serverData.cinemas" ng-required="true" ng-change="cinemaChanged(selected.cinema)"
     .form-group collapse="collapseScreenAndShowType()"
       label for="screen" Screen:
-      select.form-control ng-model="selected.screen" ng-options="screen.name for screen in serverData.screens" ng-required="true"
+      select.form-control ng-model="selected.screen" ng-options="screen.name for screen in serverData.screens" ng-required="true" ng-change="screenChanged(selected.screen)"
     .form-group collapse="collapseScreenAndShowType()"
       label for="screen" Show type:
       select.form-control ng-model="selected.showType" ng-options="showType.name for showType in serverData.showTypes" ng-required="true"

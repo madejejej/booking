@@ -22,7 +22,6 @@
     $scope.$watch (->
       $scope.selected.date
     ), (newValue, oldValue)->
-      console.log('IN WATCH');
       if newValue != oldValue
         $scope.newShow.events[0].start = $scope.selected.date
         $scope.newShow.events[0].end = addMinutesToDate($scope.selected.date, $scope.selected.movie.duration)
@@ -55,16 +54,14 @@
     startWatchingSelectedDate();
   )
 
-  CinemaService.list ((successResult) ->
-    $scope.serverData.cinemas = successResult
-  ), (errorResult) ->
-    $scope.alerts.push({message: errorResult.data.message, type: 'danger'})
-
-
   movieDurationToMinutes = (duration)->
     splitted = duration.split(':')
     return parseInt(splitted[0])*60+parseInt(splitted[1])
 
+  CinemaService.list ((successResult) ->
+    $scope.serverData.cinemas = successResult
+  ), (errorResult) ->
+    $scope.alerts.push({message: errorResult.data.message, type: 'danger'})
 
   $scope.cinemaChanged = (cinema) ->
     ScreenService.getCinemaScreens cinema.id, ((successResult) ->
@@ -79,6 +76,27 @@
     ), (error) ->
       $scope.alerts.push({message: error.data.message, type: 'danger'})
 
+
+  $scope.screenChanged = (screen) ->
+    calendar = $scope.showsCalendar
+    updateCalendarEvents(screen, calendar.fullCalendar('getView').start._d, calendar.fullCalendar('getView').end._d)
+
+  updateCalendarEvents = (screen, dateStart, dateEnd) ->
+    $scope.events = getEventsByScreenAndDateRange(screen.id, dateStart, dateEnd)
+    $scope.eventSources[1] = $scope.events
+
+  getEventsByScreenAndDateRange = (screen_id, dateStart, dateEnd) ->
+    shows = ShowService.getByScreenAndDateRange(screen_id, dateStart, dateEnd)
+    events = []
+    angular.forEach(shows, (show) ->
+      event =
+        title: show.title
+        start: show.date
+        end: addMinutesToDate(show.date, $scope.selected.movie.duration)
+        editable: false
+      events.push(event)
+    )
+    events
 
   $scope.createShow = () ->
     show =
@@ -102,7 +120,6 @@
   $scope.validShowForm = () ->
     $scope.selected.cinema != null && $scope.selected.showType!= null && $scope.selected.movie != null && $scope.selected.screen != null && $scope.selected.date.day != null && $scope.selected.date.time != null
 
-
   $scope.collapseScreenAndShowType = () ->
     $scope.selected.cinema == null
 
@@ -112,55 +129,13 @@
   $scope.closeAlert = (index) ->
     $scope.alerts.splice(index, 1);
 
-
-  date = new Date()
-  d = date.getDate()
-  m = date.getMonth()
-  y = date.getFullYear()
-
-  # event source that contains custom events on the scope
-  $scope.events = [
-    {
-      title: "All Day Event"
-      start: new Date(y, m, d,12,0)
-      end: new Date(y, m, d,14,0)
-      editable: false
-    }
-    {
-      title: "Long Event"
-      start: new Date(y, m, d ,11,0)
-      end: new Date(y, m, d, 13,0)
-      className: 'gcal-event'
-      editable: false
-    }
-  ]
-
-
-
-
-  # remove event
-  $scope.remove = (calendar) ->
-    $scope.events.splice 0, 1
-    console.log($scope.events)
-    calendar.fullCalendar( 'refetchEvents' )
-    calendar.fullCalendar( 'rerenderEvents' )
-    console.log(calendar.fullCalendar('getView').start);
-    console.log(calendar.fullCalendar('getView').end);
-    $scope.$watch (->
-      $scope.showsCalendar.fullCalendar('getView').start
-    ), ->
-      console.log($scope.showsCalendar.fullCalendar('getView').start);
-    return
-#
-
-  # Change View
+  # Change View - fired when date range changed
   $scope.changeView = (view, calendar) ->
     calendar.fullCalendar "changeView", view
     return
 
-
   # Change View
-  $scope.renderCalender = (calendar) ->
+  $scope.renderCalendar = (calendar = $scope.showsCalendar) ->
     calendar.fullCalendar "render"
     return
 
@@ -173,7 +148,9 @@
 
   $scope.viewRendered = () ->
     console.log('View rendered');
-    # TODO refresh shows from backend by dates
+    calendar = $scope.showsCalendar
+    if $scope.selected.screen != null
+      updateCalendarEvents($scope.selected.screen, calendar.fullCalendar('getView').start._d, calendar.fullCalendar('getView').end._d)
     return
 
 
@@ -200,16 +177,5 @@
       eventDrop: $scope.drop
 
 
-  $scope.eventSources = [$scope.newShow,$scope.events];
-
-#  calendarDateRangeListener = () ->
-#    $scope.showsCalendar.fullCalendar viewRender: (view, element) ->
-#        console.log(view);
-
-
-
-
-
-
-
+  $scope.eventSources = [$scope.newShow];
 ])
