@@ -21,12 +21,13 @@
   startWatchingSelectedDate = ->
     $scope.$watch (->
       $scope.selected.date
-    ), ->
+    ), (newValue, oldValue)->
       console.log('IN WATCH');
-      $scope.newShow.events[0].start = $scope.selected.date
-      $scope.newShow.events[0].end = addMinutesToDate($scope.selected.date, $scope.selected.movie.duration)
-      $scope.showsCalendar.fullCalendar( 'refetchEvents' )
-      $scope.showsCalendar.fullCalendar( 'rerenderEvents' )
+      if newValue != oldValue
+        $scope.newShow.events[0].start = $scope.selected.date
+        $scope.newShow.events[0].end = addMinutesToDate($scope.selected.date, $scope.selected.movie.duration)
+        $scope.showsCalendar.fullCalendar( 'rerenderEvents' )
+        $scope.showsCalendar.fullCalendar( 'refetchEvents' )
 
 
   addMinutesToDate = (date, minutes) ->
@@ -190,7 +191,6 @@
     $scope.updateNewShowDateRange(newStart)
     return
     
-  # config object
   $scope.uiConfig =
     calendar:
       height: 450
