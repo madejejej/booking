@@ -1,6 +1,7 @@
 div.modal-header
   | Choose seats
 div.modal-body
-  | Body
+  div id="seat-canvas-container" style="width: 100%; height: 300px;"
+    canvas id="seat-canvas" ng-click="select($event)"
 div.modal-footer
   | Footer

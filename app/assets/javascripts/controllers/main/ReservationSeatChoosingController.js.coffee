@@ -1,3 +1,4 @@
-@controllers.controller('ReservationSeatChoosingController', ['$scope','$modalInstance', 'reservationData', ($scope, $modalInstance, reservationData) ->
+@controllers.controller('ReservationSeatChoosingController',
+['$scope','$modalInstance', 'reservationData', 'showData', ($scope, $modalInstance, reservationData, showData) ->
 
 ]);
