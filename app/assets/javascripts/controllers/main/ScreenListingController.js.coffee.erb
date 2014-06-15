@@ -1,12 +1,15 @@
 @controllers.controller( 'ScreenListingController',
-['$scope','$location', '$routeParams', '$modal', 'ScreenService',
-($scope, $location, $routeParams, $modal, ScreenService) ->
+['$scope','$location', '$routeParams', '$modal', 'ScreenService', 'CinemaService',
+($scope, $location, $routeParams, $modal, ScreenService, CinemaService) ->
 
     $scope.cinemaId = $routeParams.cinema_id
-    CinemaService.getCinema($routeParams.cinema_id, (success) ->
+    CinemaService.getCinema($routeParams.cinema_id
+    , (success) ->
+        console.log(success)
         $scope.cinema = success
         $scope.screens = ScreenService.getCinemaScreens($routeParams.cinema_id)
     ,(error) ->
+        console.log(error)
     )
 
     $scope.addScreen = () ->
