@@ -1,5 +1,5 @@
 @controllers.controller('ReservationDialogController',
-  [ '$scope','$modalInstance', 'movieId', 'showId', 'ShowService', 'TicketTypeService', ($scope, $modalInstance, movieId, showId, ShowService, TicketTypeService) ->
+  [ '$scope','$modalInstance', 'movieId', 'showId', 'ReservationService', 'TicketTypeService', ($scope, $modalInstance, movieId, showId, ReservationService, TicketTypeService) ->
 
     $scope.reservation =
       booker: '',
@@ -26,15 +26,6 @@
         reservation.tickets[ticket.id] = numberValueOrZero(ticket.count)
       )
       $modalInstance.close({reservationData: reservation, type: 'success'})
-
-      ###ShowService.CRUD(movieId,showId).create
-        movieId: movieId
-        showId: showId
-        reservation
-        (success) ->
-          $modalInstance.close({message:success.message, type: 'success'})
-        (error) ->
-          $scope.alert = ({message: error.data.message, type: 'danger'})###
 
     $scope.notPositiveNumberOfTickets = () ->
       allTicketsCount = 0

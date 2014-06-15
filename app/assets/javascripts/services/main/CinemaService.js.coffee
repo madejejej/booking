@@ -39,12 +39,12 @@
         method: "DELETE"
     ).query()
 
-  factory.list = () ->
+  factory.list = (successResult, errorResult) ->
     cinemas = $resource("/api/cinemas/", {},
       query:
         method: "GET"
         isArray: true
-    ).query()
+    ).query(successResult, errorResult)
     cinemas
 
 

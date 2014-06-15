@@ -12,7 +12,7 @@
         time = Date.today().addHours(Math.floor(movie.duration/60)).addMinutes(movie.duration%60)
         movie.duration = time.toString("HH:mm")
         return
-      successFunction(successResult) unless undefined is successFunction
+      successFunction(movies) unless undefined is successFunction
       return
     ,
       (errorResult) ->

@@ -5,7 +5,7 @@ shared_examples "not authorized user" do |verb, action, params={}|
     before { send(verb, action, params.merge({format: :json})) }
 
     it "redirects to rootpath" do
-      response.should redirect_to root_path
+      response.status.should eq (401)
     end
 
   end
@@ -18,7 +18,7 @@ shared_examples "not authorized user" do |verb, action, params={}|
     end
 
     it "redirects to rootpath" do
-      response.should redirect_to root_path
+      response.status.should eq (401)
     end
 
   end
@@ -31,9 +31,13 @@ describe CinemasController do
 
     context "for the logged in organiser" do
       let!(:user) { setup_organiser_sign_in }
-      let!(:cinemas) { FactoryGirl.create_list(:cinema, 3) }
+      let!(:cinemas) { FactoryGirl.create_list(:cinema, 3, organiser_data: user.organiser_data) }
       before do
         get :index, format: :json
+      end
+
+      it "retrieves all cinemas" do
+        assigns(:cinemas).should eq cinemas
       end
 
       it "ends with success" do
@@ -55,7 +59,6 @@ describe CinemasController do
     it "ends with success" do
       response.should be_success
     end
-
   end
 
   describe "#create" do
@@ -79,5 +82,4 @@ describe CinemasController do
   describe "#destroy" do
     include_examples "not authorized user", :delete, :destroy, id: 1
   end
-
 end

@@ -17,3 +17,6 @@
 
 *.swp
 /.idea/
+/public/uploads/
+
+/node_modules

@@ -1,3 +1,4 @@
+input placeholder="Search for a movie" ng-model="movieSearch"
 table.table.table-hover
   thead
     tr
@@ -9,9 +10,9 @@ table.table.table-hover
       th Movie details
       th Available shows
   tbody
-    tr ng-repeat="movie in movies"
+    tr ng-repeat="movie in movies | filter:movieSearch"
       th
-        img ng-src='{{movie.cover_url}}' width="50" height="50"
+        img ng-src='{{movie.cover.thumb.url}}' width="50" height="50"
       th
         | {{movie.title}}
       th
@@ -25,3 +26,5 @@ table.table.table-hover
         a ng-click="showDetails(movie)" Details
       th
         a ng-click="viewShows(movie)" Shows
+        br
+        a ng-click="addNewShow(movie)" New show

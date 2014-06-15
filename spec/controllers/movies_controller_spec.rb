@@ -43,9 +43,9 @@ describe MoviesController do
     end
 
     describe "not authenticated" do
-      it "redirects" do
+      it "unauthorized status" do
         post :create, movie: movie_params, format: :json
-        response.should be_redirect
+        response.status.should eq (401)
         assigns(:movie).should be_nil
       end
     end

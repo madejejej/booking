@@ -14,12 +14,11 @@
     console.log(shows)
     shows
 
-  factory.CRUD = (movieId,showId) ->
-    return $resource("/api/movies/:movieId/shows/:showId/reservations", {},
+  factory.CRUD = (movieId) ->
+    return $resource("/api/movies/:movieId/shows", {},
       create:
         method: 'POST'
         params:
-          showId : '@showId'
           movieId: '@movieId'
     )
   factory

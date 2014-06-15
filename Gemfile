@@ -22,12 +22,15 @@ gem 'angularjs-rails'
 gem 'devise'
 gem 'slim'
 gem 'factory_girl_rails'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'cucumber-rails', require: false
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'rails_karma'
 end
 
 group :test do

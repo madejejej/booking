@@ -1,0 +1,17 @@
+{
+  "name": "booking",
+  "dependencies": {
+    "karma": ">= 0.10.9",
+    "karma-jasmine": "0.1.5",
+    "karma-ng-scenario": "0.1.0",
+    "phantomjs": "1.9.7-1",
+    "karma-coffee-preprocessor": "~0.2.1"
+  },
+  "devDependencies": {
+    "karma": "~0.12.16",
+    "karma-jasmine": "~0.1.5",
+    "karma-ng-scenario": "~0.1.0",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "karma-coffee-preprocessor": "~0.2.1"
+  }
+}

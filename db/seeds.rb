@@ -7,12 +7,14 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # ruby encoding: utf-8
 
-organiserData = OrganiserData.create!(name: 'akaterin@poczta.fm', description: 'ble', nip: '1234563218')
 
+organiser_data = OrganiserData.create!(name: 'Kocie Kino', description: 'ble', nip: '1234563218')
+
+User.create!(email: "akaterin@poczta.fm", password: "11111111", password_confirmation: "11111111", organiser_data: organiser_data)
 
 screen1 = Screen.create!(name: "Multikino sala 2")
 
-cinema1 = Cinema.create(name: "Multikino", location: "Kraków", phone: "123456789", organiser_data: organiserData)
+cinema1 = Cinema.create(name: "Multikino", location: "Kraków", phone: "123456789", organiser_data: organiser_data)
 cinema1.screens << screen1
 
 showType = ShowType.create(name: "Normalny")
@@ -33,9 +35,9 @@ cinema1.show_types << showType
 ticketType1 =TicketType.create(name: 'Normalny', price_in_eurocents: 11, show_type: showType)
 TicketType.create(name: 'Ulgowy', price_in_eurocents: 8, show_type: showType)
 
-matrix = Movie.create!(title: 'Matrix', description: 'Super Neo fighting and flying!', cover_url: 'assets/movies_covers/matrix.jpg', director: 'Andy Wachowski Lana Wachowski', duration: 120)
+matrix = Movie.create!(title: 'Matrix', description: 'Super Neo fighting and flying!', cover: File.open('app/assets/images/movies_covers/matrix.jpg'), director: 'Andy Wachowski Lana Wachowski', duration: 120)
 
-matrix2 = Movie.create!(title: 'Matrix 2', description: 'Super Neo fighting and flying even more!', cover_url: 'assets/movies_covers/matrix2.jpg', director: 'Andy Wachowski Lana Wachowski', duration: 96)
+matrix2 = Movie.create!(title: 'Matrix 2', description: 'Super Neo fighting and flying even more!', cover: File.open('app/assets/images/movies_covers/matrix2.jpg'), director: 'Andy Wachowski Lana Wachowski', duration: 96)
 
 
 

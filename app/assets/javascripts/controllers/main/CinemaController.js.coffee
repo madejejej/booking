@@ -15,11 +15,12 @@
       CinemaService.CRUD(name, location, phone).create
         name: $scope.cinema.name
         location: $scope.cinema.location
-        phone: $scope.cinema.phone ,
-        (successResult) ->
+        phone: $scope.cinema.phone
+      ,((successResult) ->
           cinema = successResult
           window.location = "/cinemas/#{cinema.id}"
           $scope.apply()
+        ), (errorResult) ->
       return
 
 

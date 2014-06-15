@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
 
 
   def require_organiser_authentication!
-    return redirect_to root_path unless user_signed_in? && current_user.organiser_data.present?
+    render json: {message: 'Need to be logged as organiser to complete this operation!'}, status: :unauthorized unless user_signed_in? && current_user.organiser_data.present?
   end
 end

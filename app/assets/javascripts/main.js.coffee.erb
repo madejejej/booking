@@ -49,6 +49,9 @@
     .when "/cinemas/:cinema_id/screens/:screen_id",
       templateUrl: "<%= asset_path("cinemas/screens/view.html") %>"
       controller: 'ScreenViewingController'
+    .when "/movies/:movie_id/shows/new",
+      templateUrl: "<%= asset_path("shows/new.html") %>"
+      controller: 'ShowAddingController'
 @App.config [
     "$httpProvider"
     ($httpProvider) ->
