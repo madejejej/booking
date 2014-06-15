@@ -2,7 +2,7 @@ class ShowsController < ApplicationController
   respond_to :json
 
   def index
-    @shows = Show.where(movie_id: 1).includes(screen: [:cinema])
+    @shows = Show.where(movie_id: params[:movie_id]).includes(screen: [:cinema])
     render json: @shows, include: [:screen, :cinema]
   end
 

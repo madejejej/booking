@@ -4,4 +4,4 @@ div.modal-body
   div id="seat-canvas-container" style="width: 100%; height: 300px;"
     canvas id="seat-canvas" ng-click="select($event)"
 div.modal-footer
-  | Footer
+  button.btn-default.btn type='submit' ng-click='makeReservation()' ng-disabled='!validForm()' {{getButtonText()}}

@@ -21,9 +21,10 @@
     $scope.chooseSeats = () ->
       reservation = $scope.reservation
       reservation.tickets = {}
-
+      reservation.ticketCount = 0
       angular.forEach($scope.tickets, (ticket) ->
         reservation.tickets[ticket.id] = numberValueOrZero(ticket.count)
+        reservation.ticketCount += reservation.tickets[ticket.id]
       )
       $modalInstance.close({reservationData: reservation, type: 'success'})
 
