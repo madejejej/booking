@@ -4,19 +4,30 @@ alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"
     | Creating new show for movie: {{selectedMovie.title}}
 form role="form"
     .form-group
-        label for="movie" Movie:
-        select.form-control ng-model="selected.movie" ng-options="movie.title for movie in serverData.movies" ng-required="true"
+      label for="movie" Movie:
+      select.form-control ng-model="selected.movie" ng-options="movie.title for movie in serverData.movies" ng-required="true"
     .form-group
-        label for="cinema"  Cinema:
-        select.form-control ng-model="selected.cinema" ng-options="cinema.name+' '+cinema.location for cinema in serverData.cinemas" ng-required="true" ng-change="cinemaChanged(selected.cinema)"
+      label for="cinema"  Cinema:
+      select.form-control ng-model="selected.cinema" ng-options="cinema.name+' '+cinema.location for cinema in serverData.cinemas" ng-required="true" ng-change="cinemaChanged(selected.cinema)"
     .form-group collapse="collapseScreenAndShowType()"
-        label for="screen" Screen:
-        select.form-control ng-model="selected.screen" ng-options="screen.name for screen in serverData.screens" ng-required="true"
+      label for="screen" Screen:
+      select.form-control ng-model="selected.screen" ng-options="screen.name for screen in serverData.screens" ng-required="true" ng-change="screenChanged(selected.screen)"
     .form-group collapse="collapseScreenAndShowType()"
-        label for="screen" Show type:
-        select.form-control ng-model="selected.showType" ng-options="showType.name for showType in serverData.showTypes" ng-required="true"
-    .form-group
-        label for="date" Date:
-        input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="selected.date" is-open="opened" min-date="minDate()"
-        timepicker ng-model="selected.date" hour-step="1" minute-step="15" show-meridian="false"
+      label for="screen" Show type:
+      select.form-control ng-model="selected.showType" ng-options="showType.name for showType in serverData.showTypes" ng-required="true"
+    .container
+      .row
+        .col-md-8
+          button class="btn btn-success" ng-click="changeView('agendaDay', showsCalendar)" AgendaDay
+          button class="btn btn-success" ng-click="changeView('agendaWeek', showsCalendar)" AgendaWeek
+          button class="btn btn-success" ng-click="changeView('month', showsCalendar)" Month
+          div ui-calendar="uiConfig.calendar" calendar="showsCalendar" class="span8 calendar" ng-model="eventSources" config="uiConfig.calendar"
+        .col-md-4
+          label for="date" Date:
+          input type="text"  datepicker-popup="dd-MM-yyyy" ng-model="selected.date" is-open="opened" min-date="minDate()"
+          div style="{margin:auto};"
+          timepicker ng-model="selected.date" hour-step="1" minute-step="15" show-meridian="false"
+
+
     button.btn.btn-default type="submit" ng-click='createShow()' ng-disabled='!validShowForm()'  Submit
+    button type="button" ng-click="remove(showsCalendar)" REMOVE

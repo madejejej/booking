@@ -20,5 +20,20 @@
         params:
           movieId: '@movieId'
     )
+
+  factory.getByScreenAndDateRange = (screen_id, dateStart, dateEnd) ->
+    # TODO return shows from service
+    movies = [
+      {
+        title: "Matrix"
+        date: new Date()
+      }
+      {
+        title: "Matrix 2"
+        date: new Date
+      }
+    ]
+    return movies
+
   factory
 )
