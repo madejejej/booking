@@ -3,23 +3,20 @@
 ($scope, $modalInstance, $window, reservationData, showData, ScreenService, SeatService, ReservationService) ->
 
   $scope.taken = ReservationService.getReservations(showData.movie_id, showData.id)
-  console.log($scope.taken)
   $scope.selected = []
-  console.log($scope.taken)
   $scope.screen = ScreenService.getScreen(showData.cinema.id, showData.screen.id,
     (success) ->
-      $scope.redraw()
-    (error) ->
-      $modal.open(
-        templateUrl: '<%= asset_path("modals/sadModal.html") %>',
-        controller: 'SimpleDialogController'
-      ).result.then(() ->
-        $location.path("/cinemas/#{showData.cinema.id}/screens")
+      $scope.seats = SeatService.getSeats(showData.cinema.id, showData.screen.id,
+      (success) ->
+        $scope.redraw()
+        (error) ->
+          $modal.open(
+            templateUrl: '<%= asset_path("modals/sadModal.html") %>',
+            controller: 'SimpleDialogController'
+          ).result.then(() ->
+            $location.path("/cinemas/#{showData.cinema.id}/screens")
+          )
       )
-  )
-  $scope.seats = SeatService.getSeats(showData.cinema.id, showData.screen.id,
-  (success) ->
-    $scope.redraw()
     (error) ->
       $modal.open(
         templateUrl: '<%= asset_path("modals/sadModal.html") %>',
@@ -38,7 +35,7 @@
       (success) ->
         $modalInstance.close({message:success.message, type: 'success'})
       (error) ->
-        $scope.alert = {message:error.data.message, type: 'danger'}
+        $modalInstance.close({message:error.data.message, type: 'error'})
 
 
   $scope.getButtonText = () ->
@@ -50,9 +47,6 @@
       return "Make reservation"
   $scope.validForm = () ->
     return $scope.selected.length - reservationData.ticketCount == 0
-
-  console.log(reservationData)
-
 
   $scope.redraw = () ->
     $scope.canvas = document.getElementById("seat-canvas")
@@ -99,9 +93,10 @@
     if !(find is null)
       isTaken = false
       isSelected = false;
-      for i in [1..$scope.taken.length] by 1
-        if($scope.taken[i-1].x == coord.x && $scope.taken[i-1].y == coord.y)
-          isTaken = true
+      for res in $scope.taken
+        for ticket in res.tickets
+          if(ticket.seat.x == coord.x && ticket.seat.y == coord.y)
+            isTaken = true
       if(!isTaken)
         for i in [1..$scope.selected.length] by 1
           if($scope.selected[i-1].x == coord.x && $scope.selected[i-1].y == coord.y)
@@ -134,14 +129,15 @@
       $scope.context.strokeStyle = 'black'
       $scope.context.fill()
       $scope.context.stroke()
-    for seat in $scope.taken
-      rect = roomCoordToScreen(seat)
-      $scope.context.beginPath()
-      $scope.context.rect(rect.x, rect.y, rect.width, rect.height)
-      $scope.context.fillStyle = 'red'
-      $scope.context.strokeStyle = 'black'
-      $scope.context.fill()
-      $scope.context.stroke()
+    for reservation in $scope.taken
+      for ticket in reservation.tickets
+        rect = roomCoordToScreen({x: ticket.seat.x, y: ticket.seat.y})
+        $scope.context.beginPath()
+        $scope.context.rect(rect.x, rect.y, rect.width, rect.height)
+        $scope.context.fillStyle = 'red'
+        $scope.context.strokeStyle = 'black'
+        $scope.context.fill()
+        $scope.context.stroke()
     for seat in $scope.selected
       rect = roomCoordToScreen(seat)
       $scope.context.beginPath()
@@ -170,5 +166,6 @@
     $scope.context.fillText($scope.screen.height.toString(), $scope.canvas.width/80, $scope.canvas.height/2)
     $scope.context.fillText($scope.screen.width.toString(), $scope.canvas.width/2, (79*$scope.canvas.height)/80)
 
-  angular.element($window).bind 'resize', $scope.redraw
+  #angular.element($window).bind 'resize', $scope.redraw
+
 ]);

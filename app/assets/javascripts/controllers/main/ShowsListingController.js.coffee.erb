@@ -8,7 +8,7 @@
             $scope.alerts = []
 
             $scope.openReservationDialog = (show) ->
-                modalInstance = $modal.open
+                reservationDialog = $modal.open
                     templateUrl: '<%= asset_path("reservation/reservationDialog.html") %>',
                     controller: 'ReservationDialogController'
                     resolve:
@@ -16,12 +16,12 @@
                             show.id
                         movieId: () ->
                             $scope.movieId
-                modalInstance.result.then( (result) ->
+                reservationDialog.result.then( (result) ->
                     if result.message?
                         $scope.alerts.push({msg: result.message, type: result.type})
                         return
                     else if result.reservationData?
-                        modalInstance = $modal.open
+                        seatChosingdialog = $modal.open
                             templateUrl: '<%= asset_path("reservation/seatChoosingDialog.html") %>',
                             controller: 'ReservationSeatChoosingController'
                             resolve:
@@ -29,6 +29,9 @@
                                     result.reservationData
                                 showData: () ->
                                     show
+                        seatChosingdialog.result.then( (result) ->
+                            $scope.alerts.push({msg: result.message, type: result.type})
+                        )
                 )
 
             $scope.closeAlert = (index) ->

@@ -13,7 +13,11 @@ class ReservationsController < ApplicationController
   end
 
   def index
-    @reservations = Movie.find(params[:movie_id]).shows.find(params[:show_id]).reservations.includes(tickets: [:seat])
-    render json: @reservations, include: [tickets: [:seat]]
+    begin
+      @reservations = Movie.find(params[:movie_id]).shows.find(params[:show_id]).reservations.includes(tickets: [:seat])
+    rescue Exception => error
+      render json:{ message: error.message}, status: :unprocessable_entity
+    end
+      render json: @reservations, include: {tickets: {include: :seat}}
   end
 end

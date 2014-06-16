@@ -3,8 +3,6 @@
 
 
   factory.CRUD = (movieId,showId) ->
-    console.log(movieId)
-    console.log(showId)
     return $resource("/api/movies/:movieId/shows/:showId/reservations", {},
       create:
         method: 'POST'

@@ -11,7 +11,6 @@
         show.date = new Date(show.date).toString("d-MMM-yyyy HH:mm")
         return
     )
-    console.log(shows)
     shows
 
   factory.CRUD = (movieId) ->
