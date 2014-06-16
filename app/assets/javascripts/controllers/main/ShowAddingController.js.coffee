@@ -45,14 +45,17 @@
       movie.duration = movieDurationToMinutes(movie.duration)
       if movie.id == $scope.movieId
         $scope.selected.movie = movie
-        $scope.newShow.events.push
-          start: $scope.selected.date
-          end: addMinutesToDate($scope.selected.date, $scope.selected.movie.duration)
-          title: 'New show'
-          type: 'party'
+        addNewShowToCalendar($scope.selected.date, addMinutesToDate($scope.selected.date, $scope.selected.movie.duration), "New Show")
     )
     startWatchingSelectedDate();
   )
+
+  addNewShowToCalendar = (startDate, endDate, title) ->
+    $scope.newShow.events.push
+      start: startDate
+      end: endDate
+      title: title
+      type: 'party'
 
   movieDurationToMinutes = (duration)->
     splitted = duration.split(':')
