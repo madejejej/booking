@@ -23,10 +23,20 @@ class ShowsController < ApplicationController
     render json: {message: 'Show created!'}
   end
 
+  def destroy
+    @show = Show.find(params[:id])
+    @show.destroy
+    respond_with true
+  end
+
+  def update
+    @show = Show.find(params[:id])
+    @show.update_attributes(params.permit(:movie_id, :screen_id, :date, :show_type_id))
+    respond_with @show
+  end
+
   private
   def show_params
     params.require(:show).permit(:movie_id, :screen_id, :cinema_id, :datetime, :show_type_id)
   end
-
-
 end
