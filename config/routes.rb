@@ -13,6 +13,8 @@ Booking::Application.routes.draw do
       end
     end
 
+    get 'shows/screen/:screen_id', to: 'shows#get_by_screen_and_dates', shallow: true, controller: 'shows'
+
     resources :cinemas do
       resources :show_type
       resources :screens do
