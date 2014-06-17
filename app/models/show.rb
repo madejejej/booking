@@ -4,14 +4,14 @@ class Show < ActiveRecord::Base
   belongs_to :show_type
 
   has_many :reservations
-  has_many :cinemas, through: :screen
+  has_one :cinema, through: :screen
 
   validates :movie, presence: true
   validates :screen, presence: true
   validates :show_type, presence: true
 
   scope :all_for_movie_with_screen, ->(movie_id) do
-    select(:date, :name, 'shows.id').where(movie_id: movie_id).joins(:screen)
+    select(:date, :name, 'shows.id as show_id', 'screens.id').where(movie_id: movie_id).joins(:screen)
   end
 
   scope :all_for_screen, ->(screen_id) do

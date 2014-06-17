@@ -3,14 +3,17 @@ alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)"
 table.table.table-hover
   thead
     tr
+      th Cinema
       th Screen
       th Date
       th Make Reservation
   tbody
     tr ng-repeat="show in shows"
       td
-        | {{show.name}}
+        | {{show.cinema.name}}
+      td
+        | {{show.screen.name}}
       td
         | {{show.date}}
       td
-        a ng-click="openReservationDialog(show.id)" Make Reservation
+        a ng-click="openReservationDialog(show)" Make Reservation
