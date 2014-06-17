@@ -85,21 +85,31 @@
     updateCalendarEvents(screen, calendar.fullCalendar('getView').start._d, calendar.fullCalendar('getView').end._d)
 
   updateCalendarEvents = (screen, dateStart, dateEnd) ->
-    $scope.events = getEventsByScreenAndDateRange(screen.id, dateStart, dateEnd)
-    $scope.eventSources[1] = $scope.events
+    getEventsByScreenAndDateRange(screen.id, dateStart, dateEnd)
+
 
   getEventsByScreenAndDateRange = (screen_id, dateStart, dateEnd) ->
-    shows = ShowService.getByScreenAndDateRange(screen_id, dateStart, dateEnd)
-    events = []
-    angular.forEach(shows, (show) ->
-      event =
-        title: show.title
-        start: show.date
-        end: addMinutesToDate(show.date, $scope.selected.movie.duration)
-        editable: false
-      events.push(event)
+    shows = null
+    ShowService.getByScreenAndDateRange(screen_id, dateStart, dateEnd).getByCinemaAndDateRange(
+      screen_id: screen_id
+      date_start: dateStart
+      date_end: dateEnd
+    ,(success) ->
+      console.log(success);
+      shows = success
+      console.log(shows);
+      events = []
+      angular.forEach(shows, (show) ->
+        event =
+          title: show.title
+          start: show.date
+          end: addMinutesToDate(show.date, $scope.selected.movie.duration)
+          editable: false
+        events.push(event)
+      )
+      $scope.events = events
+      $scope.eventSources[1] = $scope.events
     )
-    events
 
   $scope.createShow = () ->
     show =

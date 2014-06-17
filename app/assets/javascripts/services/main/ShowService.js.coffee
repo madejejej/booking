@@ -21,19 +21,14 @@
           movieId: '@movieId'
     )
 
-  factory.getByScreenAndDateRange = (screen_id, dateStart, dateEnd) ->
-    # TODO return shows from service
-    movies = [
-      {
-        title: "Matrix"
-        date: new Date()
-      }
-      {
-        title: "Matrix 2"
-        date: new Date
-      }
-    ]
-    return movies
-
+  factory.getByScreenAndDateRange = (screen_id, date_start, date_end) ->
+    return $resource("/api/shows/screen/#{screen_id}", {},
+      getByCinemaAndDateRange:
+        method: 'GET'
+        params:
+          date_start: '@date_start'
+          date_end: '@date_end'
+        isArray: true
+    )
   factory
 )

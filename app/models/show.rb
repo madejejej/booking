@@ -14,6 +14,10 @@ class Show < ActiveRecord::Base
     select(:date, :name, 'shows.id').where(movie_id: movie_id).joins(:screen)
   end
 
+  scope :all_for_screen, ->(screen_id) do
+    select(:date, :title).where(screen_id: screen_id).joins(:movie)
+  end
+
   def available_seats_ids
     screen.seats.ids - reservations.map(&:seats).flatten.map(&:id)
   end

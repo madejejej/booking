@@ -35,6 +35,13 @@ class ShowsController < ApplicationController
     respond_with @show
   end
 
+  def get_by_screen_and_dates
+    @shows = Show.all_for_screen(params[:screen_id])
+    @shows.select! { |s| s.date >= params[:date_start] } unless params[:date_start].nil?
+    @shows.select! { |s| s.date <= params[:date_end] } unless params[:date_end].nil?
+    respond_with @shows
+  end
+
   private
   def show_params
     params.require(:show).permit(:movie_id, :screen_id, :cinema_id, :datetime, :show_type_id)
