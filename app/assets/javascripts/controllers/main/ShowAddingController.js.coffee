@@ -95,9 +95,7 @@
       date_start: dateStart
       date_end: dateEnd
     ,(success) ->
-      console.log(success);
       shows = success
-      console.log(shows);
       events = []
       angular.forEach(shows, (show) ->
         event =
@@ -122,10 +120,13 @@
         millisecond: 0
       )
 
+
     ShowService.CRUD(show.movie_id).create
       movieId: show.movie_id
       show: show
       (success) ->
+        calendar = $scope.showsCalendar
+        updateCalendarEvents($scope.selected.screen, calendar.fullCalendar('getView').start._d, calendar.fullCalendar('getView').end._d)
         $scope.alerts.push({message: success.message, type: 'success'})
       (error) ->
         $scope.alerts.push({message: error.data.message, type: 'danger'})
