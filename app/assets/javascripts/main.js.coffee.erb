@@ -6,7 +6,7 @@
 #= require_tree ./filters/main
 
 
-@App = angular.module('App', ['App.services','App.controllers','ngRoute'])
+@App = angular.module('App', ['App.services','App.controllers','ngRoute', 'angularFileUpload'])
 
 @App.config ($httpProvider, $routeProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)

@@ -21,7 +21,7 @@
       )
     movies
 
-  factory.create = (movie) ->
+  factory.create = (movie, cover) ->
     return $resource("/api/movies/", {},
       query:
         method: "POST"
@@ -29,6 +29,7 @@
           title: movie.title
           description: movie.description
           director: movie.director
+          cover: cover
     ).query(
       (successResult) ->
         movie = successResult
