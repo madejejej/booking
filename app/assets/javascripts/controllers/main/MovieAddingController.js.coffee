@@ -16,8 +16,12 @@
     $scope.createMovie = () ->
       $scope.uploader.formData.push
         title: $scope.movie.title
+      $scope.uploader.bind('success', (event, item, progress) ->
+        window.location = "/movies"
+        $scope.apply()
+      )
+
       $scope.uploader.uploadAll()
-      #MovieService.create($scope.movie, uploader.queue.pop().file)
       return
 
     csrf_token = document.querySelector("meta[name=\"csrf-token\"]").getAttribute("content")
