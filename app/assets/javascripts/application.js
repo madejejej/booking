@@ -13,9 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular
-//= require angular-route.min.js
-//= require angular-resource.min.js
-//= require angular-animate.min.js
+//= require angular-route
+//= require angular-resource
+//= require angular-animate
 //= require main
 //= require_tree .
 //= require ui-bootstrap-tpls-0.10.0.js
